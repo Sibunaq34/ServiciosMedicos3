@@ -1,0 +1,53 @@
+# ===========================
+# React / Node.js
+# ===========================
+node_modules/
+dist/
+.vite/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# ===========================
+# Visual Studio Code
+# ===========================
+.vscode/
+
+# ===========================
+# Visual Studio
+# ===========================
+.vs/
+*.user
+*.suo
+
+# ===========================
+# ASP.NET Core
+# ===========================
+bin/
+obj/
+
+# Rider
+.idea/
+
+# Logs
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos temporales
+*.tmp
+*.cache
+
+# Publicaciones
+publish/
+
+# Cobertura
+coverage/
