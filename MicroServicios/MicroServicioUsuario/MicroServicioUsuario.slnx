@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../MicroServicioOferentes/MicroServicioOferentes.csproj" Id="8589e1cc-5fa1-4daf-81c9-c5d934f38e93" />
   <Project Path="MicroServicioUsuario.csproj" />
 </Solution>
