@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Servicios_Medicos.Repository
+namespace MicroServicioPuestos.Repository
 {
     public interface IDbConnectionFactory
     {
