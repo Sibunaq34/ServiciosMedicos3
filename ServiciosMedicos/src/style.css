@@ -1,0 +1,394 @@
+
+:root {
+    --app-primary: #12375C;
+    --app-primary-dark: #0D2B47;
+    --app-primary-light: #EAF2F8;
+    --app-bg: #F5F7FA;
+    --app-text: #1F2937;
+    --app-border: #D6DEE8;
+}
+
+
+html,
+body,
+#root {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--app-bg);
+    color: var(--app-text);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* ==========================
+   Layout principal
+   ========================== */
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--app-bg);
+}
+
+.app-content {
+    flex: 1;
+    min-width: 0;
+    background-color: var(--app-bg);
+}
+
+
+/* ==========================
+   Sidebar
+   ========================== */
+
+.app-sidebar {
+    width: 250px;
+    min-width: 250px;
+    min-height: 100vh;
+    background-color: var(--app-primary);
+    color: #fff;
+}
+
+.app-sidebar .sidebar-brand {
+    background-color: var(--app-primary-dark);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.app-sidebar .sidebar-nav {
+    gap: 0.25rem;
+}
+
+.app-sidebar .sidebar-link {
+    display: flex;
+    align-items: center;
+
+    color: rgba(255, 255, 255, 0.85);
+    border-radius: 0.75rem;
+
+    padding: 0.85rem 1rem;
+    margin-bottom: 0.35rem;
+
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.app-sidebar .sidebar-link i {
+    font-size: 1rem;
+}
+
+.app-sidebar .sidebar-link:hover,
+.app-sidebar .sidebar-link.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+
+/* ==========================
+   Sidebar móvil - Offcanvas
+   ========================== */
+
+.offcanvas-sidebar {
+    background-color: var(--app-primary);
+    color: #fff;
+}
+
+.offcanvas-sidebar .offcanvas-header {
+    background-color: var(--app-primary-dark);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.offcanvas-sidebar .offcanvas-title {
+    color: #fff;
+}
+
+.offcanvas-sidebar .offcanvas-body {
+    background-color: var(--app-primary);
+    color: #fff;
+}
+
+.offcanvas-sidebar .sidebar-nav {
+    background-color: var(--app-primary);
+}
+
+.offcanvas-sidebar .sidebar-link {
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.offcanvas-sidebar .sidebar-link:hover,
+.offcanvas-sidebar .sidebar-link.active {
+    background-color: rgba(255, 255, 255, 0.18);
+    color: #fff;
+}
+
+
+/* ==========================
+   Barra superior
+   ========================== */
+
+.app-topbar {
+    min-height: 64px;
+
+    background-color: #fff;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.sidebar-toggle {
+    border-color: var(--app-border);
+    color: var(--app-primary);
+}
+
+.sidebar-toggle:hover {
+    background-color: var(--app-primary);
+    border-color: var(--app-primary);
+    color: #fff;
+}
+
+
+/* ==========================
+   Usuario
+   ========================== */
+
+.user-session-area {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+
+    padding: 0.35rem 0.6rem;
+
+    border: 1px solid var(--app-border);
+    border-radius: 999px;
+
+    background-color: #F8FAFC;
+}
+
+.user-avatar-badge {
+    display: inline-grid;
+    place-items: center;
+
+    width: 2rem;
+    height: 2rem;
+
+    border-radius: 50%;
+
+    background-color: var(--app-primary-light);
+    color: var(--app-primary);
+}
+
+.user-avatar-badge i {
+    font-size: 1rem;
+}
+
+
+/* ==========================
+   Contenido de las páginas
+   ========================== */
+
+.app-main {
+    min-height: calc(100vh - 64px);
+    padding: 1.75rem 2rem;
+}
+
+
+/* ==========================
+   Títulos
+   ========================== */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: var(--app-text);
+}
+
+
+/* ==========================
+   Tarjetas
+   ========================== */
+
+.card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0.35rem 1rem rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #ECEFF3;
+    font-weight: 600;
+}
+
+
+/* ==========================
+   Página de inicio
+   ========================== */
+
+.home-card {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.home-logo {
+    display: block;
+
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+
+    margin: 0 auto;
+}
+
+
+/* ==========================
+   Tablas
+   ========================== */
+
+.table {
+    margin-bottom: 0;
+}
+
+.table > :not(caption) > * > * {
+    padding: 1rem 1.25rem;
+    vertical-align: middle;
+}
+
+.table thead th {
+    background-color: #F8F9FB;
+    color: #6B7280;
+
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+
+    white-space: nowrap;
+}
+
+.table tbody tr:hover {
+    background-color: #F8FBFD;
+}
+
+
+/* ==========================
+   Formularios
+   ========================== */
+
+.form-label {
+    font-weight: 600;
+}
+
+.form-control,
+.form-select {
+    border-color: var(--app-border);
+    border-radius: 0.6rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--app-primary);
+
+    box-shadow:
+        0 0 0 0.2rem rgba(18, 55, 92, 0.15);
+}
+
+
+/* ==========================
+   Botones
+   ========================== */
+
+.btn {
+    border-radius: 0.6rem;
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--app-primary);
+    --bs-btn-border-color: var(--app-primary);
+
+    --bs-btn-hover-bg: var(--app-primary-dark);
+    --bs-btn-hover-border-color: var(--app-primary-dark);
+
+    --bs-btn-active-bg: var(--app-primary-dark);
+    --bs-btn-active-border-color: var(--app-primary-dark);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--app-primary);
+    --bs-btn-border-color: var(--app-primary);
+
+    --bs-btn-hover-bg: var(--app-primary);
+    --bs-btn-hover-border-color: var(--app-primary);
+}
+
+a {
+    color: var(--app-primary);
+}
+
+a:hover {
+    color: var(--app-primary-dark);
+}
+
+
+.alert {
+    border: none;
+    border-radius: 0.75rem;
+}
+
+footer {
+    margin-top: 3rem;
+    padding: 1rem 0;
+
+    text-align: center;
+    color: #6B7280;
+}
+
+
+
+@media (max-width: 991.98px) {
+
+    .app-layout {
+        display: block;
+    }
+
+    .app-sidebar:not(.offcanvas-sidebar) {
+        display: none !important;
+    }
+
+    .app-main {
+        padding: 1.5rem;
+    }
+}
+
+
+
+
+@media (max-width: 575.98px) {
+
+    .app-main {
+        padding: 1rem;
+    }
+
+    .user-session-area {
+        gap: 0.45rem;
+    }
+
+    .user-avatar-pill {
+        padding: 0.3rem 0.5rem;
+    }
+
+    .table > :not(caption) > * > * {
+        padding: 0.85rem;
+    }
+}
+
