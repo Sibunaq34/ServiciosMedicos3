@@ -6,19 +6,10 @@
       "AbsoluteMoniker": "D:0:0:{01259940-4528-4A7A-BFC9-339A918EC497}|..\\MicroServiciosPuestos\\MicroServiciosPuestos.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\microserviciospuestos\\puestosendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{01259940-4528-4A7A-BFC9-339A918EC497}|..\\MicroServiciosPuestos\\MicroServiciosPuestos.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\microserviciospuestos\\services\\ipuestos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{71FB7A30-DF78-4472-A985-C914BCD44FD3}|..\\Gateway\\Gateway.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\gateway\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{01259940-4528-4A7A-BFC9-339A918EC497}|..\\MicroServiciosPuestos\\MicroServiciosPuestos.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\microserviciospuestos\\entities\\puesto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{01259940-4528-4A7A-BFC9-339A918EC497}|..\\MicroServiciosPuestos\\MicroServiciosPuestos.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\microserviciospuestos\\services\\puestosservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{01259940-4528-4A7A-BFC9-339A918EC497}|..\\MicroServiciosPuestos\\MicroServiciosPuestos.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\microserviciospuestos\\repository\\puestosrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{01259940-4528-4A7A-BFC9-339A918EC497}|..\\MicroServiciosPuestos\\MicroServiciosPuestos.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\microserviciospuestos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{01259940-4528-4A7A-BFC9-339A918EC497}|..\\MicroServiciosPuestos\\MicroServiciosPuestos.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\microserviciospuestos\\microserviciospuestos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -28,8 +19,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 170,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\Gateway\\appsettings.json",
+              "RelativeDocumentMoniker": "..\\Gateway\\appsettings.json",
+              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\Gateway\\appsettings.json",
+              "RelativeToolTip": "..\\Gateway\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-10T18:44:04.46Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MicroServiciosPuestos",
+              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\MicroServiciosPuestos.csproj",
+              "RelativeDocumentMoniker": "..\\MicroServiciosPuestos\\MicroServiciosPuestos.csproj",
+              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\MicroServiciosPuestos.csproj",
+              "RelativeToolTip": "..\\MicroServiciosPuestos\\MicroServiciosPuestos.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-08-10T19:02:02.716Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -38,73 +56,9 @@
               "RelativeDocumentMoniker": "..\\MicroServiciosPuestos\\PuestosEndPoint.cs",
               "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\PuestosEndPoint.cs",
               "RelativeToolTip": "..\\MicroServiciosPuestos\\PuestosEndPoint.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwA8AAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-07T21:22:05.316Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "PuestosRepository.cs",
-              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\Repository\\PuestosRepository.cs",
-              "RelativeDocumentMoniker": "..\\MicroServiciosPuestos\\Repository\\PuestosRepository.cs",
-              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\Repository\\PuestosRepository.cs",
-              "RelativeToolTip": "..\\MicroServiciosPuestos\\Repository\\PuestosRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-07T20:56:16.206Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PuestosService.cs",
-              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\Services\\PuestosService.cs",
-              "RelativeDocumentMoniker": "..\\MicroServiciosPuestos\\Services\\PuestosService.cs",
-              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\Services\\PuestosService.cs",
-              "RelativeToolTip": "..\\MicroServiciosPuestos\\Services\\PuestosService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-09T02:02:52.812Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Puesto.cs",
-              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\Entities\\Puesto.cs",
-              "RelativeDocumentMoniker": "..\\MicroServiciosPuestos\\Entities\\Puesto.cs",
-              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\Entities\\Puesto.cs",
-              "RelativeToolTip": "..\\MicroServiciosPuestos\\Entities\\Puesto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-09T01:53:40.454Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\Program.cs",
-              "RelativeDocumentMoniker": "..\\MicroServiciosPuestos\\Program.cs",
-              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\Program.cs",
-              "RelativeToolTip": "..\\MicroServiciosPuestos\\Program.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAADwvx4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-07T21:12:54.447Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IPuestos.cs",
-              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\Services\\IPuestos.cs",
-              "RelativeDocumentMoniker": "..\\MicroServiciosPuestos\\Services\\IPuestos.cs",
-              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\Services\\IPuestos.cs",
-              "RelativeToolTip": "..\\MicroServiciosPuestos\\Services\\IPuestos.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-09T02:02:09.747Z",
+              "WhenOpened": "2026-08-10T18:48:36.34Z",
               "EditorCaption": ""
             }
           ]

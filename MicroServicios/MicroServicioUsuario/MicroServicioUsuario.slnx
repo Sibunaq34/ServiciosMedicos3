@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="../Gateway/Gateway.csproj" Id="71fb7a30-df78-4472-a985-c914bcd44fd3" />
   <Project Path="../MicroServicioEmpleados/MicroServicioEmpleados.csproj" Id="f59c2cf2-cfe1-4aa9-876a-83370a3751c3" />
   <Project Path="../MicroServicioOferentes/MicroServicioOferentes.csproj" Id="8589e1cc-5fa1-4daf-81c9-c5d934f38e93" />
   <Project Path="../MicroServiciosPuestos/MicroServiciosPuestos.csproj" Id="01259940-4528-4a7a-bfc9-339a918ec497" />
