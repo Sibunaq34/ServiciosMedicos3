@@ -1,12 +1,96 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{71FB7A30-DF78-4472-A985-C914BCD44FD3}|..\\Gateway\\Gateway.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\gateway\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71FB7A30-DF78-4472-A985-C914BCD44FD3}|..\\Gateway\\Gateway.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\gateway\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{01259940-4528-4A7A-BFC9-339A918EC497}|..\\MicroServiciosPuestos\\MicroServiciosPuestos.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\microserviciospuestos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71FB7A30-DF78-4472-A985-C914BCD44FD3}|..\\Gateway\\Gateway.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\gateway\\gateway.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71FB7A30-DF78-4472-A985-C914BCD44FD3}|..\\Gateway\\Gateway.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\gateway\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 170,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\Gateway\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "..\\Gateway\\Properties\\launchSettings.json",
+              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\Gateway\\Properties\\launchSettings.json",
+              "RelativeToolTip": "..\\Gateway\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-11T19:28:51.249Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\Program.cs",
+              "RelativeDocumentMoniker": "..\\MicroServiciosPuestos\\Program.cs",
+              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\Program.cs",
+              "RelativeToolTip": "..\\MicroServiciosPuestos\\Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T19:10:27.816Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\Gateway\\Program.cs",
+              "RelativeDocumentMoniker": "..\\Gateway\\Program.cs",
+              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\Gateway\\Program.cs",
+              "RelativeToolTip": "..\\Gateway\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T19:10:12.92Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Gateway.http",
+              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\Gateway\\Gateway.http",
+              "RelativeDocumentMoniker": "..\\Gateway\\Gateway.http",
+              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\Gateway\\Gateway.http",
+              "RelativeToolTip": "..\\Gateway\\Gateway.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2026-08-11T19:01:44.835Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\Gateway\\appsettings.json",
+              "RelativeDocumentMoniker": "..\\Gateway\\appsettings.json",
+              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\Gateway\\appsettings.json",
+              "RelativeToolTip": "..\\Gateway\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAABeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-11T02:50:52.564Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
