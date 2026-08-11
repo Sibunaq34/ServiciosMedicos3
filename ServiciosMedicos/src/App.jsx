@@ -1,22 +1,16 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import Header from "./layouts/Header";
-
-import Inicio from "./pages/Index";
-import Puestos from "./pages/Puestos";
+import AppRoutes from "./routes/App.Routes";
 
 function App() {
   return (
-  <BrowserRouter>
-    <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<Inicio />}/>
-          <Route path="/puestos" element={<Puestos />}/>
-        </Routes>
-      </main>
-  </BrowserRouter>
-    );
+    <BrowserRouter>
+      <Header>
+        <AppRoutes />
+      </Header>
+    </BrowserRouter>
+  );
 }
 
 export default App;

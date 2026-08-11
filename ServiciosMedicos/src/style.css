@@ -58,6 +58,10 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
+.app-sidebar .sidebar-brand h5 {
+    color: #fff;
+}
+
 .app-sidebar .sidebar-nav {
     gap: 0.25rem;
 }
@@ -353,6 +357,159 @@ footer {
     color: #6B7280;
 }
 
+/* ==========================
+   Página de Puestos
+   ========================== */
+
+.core6-puestos-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.core6-puestos-header {
+    border: none;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-primary-dark) 100%);
+    color: #fff;
+}
+
+.core6-puestos-header .card-body {
+    align-items: center;
+}
+
+.core6-puestos-header h1,
+.core6-puestos-header p {
+    color: #fff;
+}
+
+.core6-puestos-header-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    font-size: 1.25rem;
+}
+
+.core6-puestos-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.core6-summary-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.1rem;
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 0.35rem 1rem rgba(0, 0, 0, 0.06);
+}
+
+.core6-summary-item strong {
+    display: block;
+    color: var(--app-primary);
+    font-size: 1rem;
+}
+
+.core6-summary-item span:last-child {
+    display: block;
+    color: #6B7280;
+    font-size: 0.9rem;
+}
+
+.core6-summary-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background: var(--app-primary-light);
+    color: var(--app-primary);
+}
+
+.core6-puestos-table-wrap {
+    border-top: 1px solid #ECEFF3;
+}
+
+.core6-puestos-table thead th {
+    background-color: #F8FAFC;
+    color: #475569;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+}
+
+.core6-puesto-code {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 4.2rem;
+    padding: 0.32rem 0.6rem;
+    border-radius: 999px;
+    background: var(--app-primary-light);
+    color: var(--app-primary);
+    font-weight: 600;
+}
+
+.core6-puesto-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    color: var(--app-primary);
+    text-decoration: none;
+}
+
+.core6-puesto-link:hover {
+    color: var(--app-primary-dark);
+}
+
+.core6-puesto-salary {
+    font-weight: 600;
+    color: var(--app-primary);
+}
+
+.core6-puesto-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: #E8F5E9;
+    color: #2E7D32;
+    font-weight: 600;
+}
+
+.core6-puesto-status span {
+    display: inline-block;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.core6-puestos-list-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem 1.25rem;
+    background-color: #fff;
+}
+
+.core6-puestos-pagination .page-link {
+    color: var(--app-primary);
+}
+
+.core6-puestos-pagination .page-item.active .page-link {
+    background-color: var(--app-primary);
+    border-color: var(--app-primary);
+}
 
 
 @media (max-width: 991.98px) {
@@ -389,6 +546,15 @@ footer {
 
     .table > :not(caption) > * > * {
         padding: 0.85rem;
+    }
+
+    .core6-puestos-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .core6-puestos-list-footer {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
 
