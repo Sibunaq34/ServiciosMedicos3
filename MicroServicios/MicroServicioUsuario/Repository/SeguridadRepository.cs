@@ -28,17 +28,30 @@ public sealed class SeguridadRepository
             commandType: CommandType.StoredProcedure);
     }
 
-    public async Task RegistrarIntentoFallidoAsync(int idUsuario, int intentos)
+    public async Task<int> RegistrarIntentoFallidoAsync(int idUsuario)
     {
         using var connection = _connectionFactory.CreateConnection();
         await connection.OpenAsync();
 
         var parameters = new DynamicParameters();
         parameters.Add("pIdUsuario", idUsuario, DbType.Int32);
-        parameters.Add("pIntentos", intentos, DbType.Int32);
+
+        return await connection.QuerySingleAsync<int>(
+            "RegistrarIntentoFallido",
+            parameters,
+            commandType: CommandType.StoredProcedure);
+    }
+
+    public async Task ReiniciarIntentosFallidosAsync(int idUsuario)
+    {
+        using var connection = _connectionFactory.CreateConnection();
+        await connection.OpenAsync();
+
+        var parameters = new DynamicParameters();
+        parameters.Add("pIdUsuario", idUsuario, DbType.Int32);
 
         await connection.ExecuteAsync(
-            "RegistrarIntentoFallido",
+            "ReiniciarIntentosFallidos",
             parameters,
             commandType: CommandType.StoredProcedure);
     }

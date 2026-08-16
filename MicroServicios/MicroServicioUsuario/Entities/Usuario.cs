@@ -8,6 +8,7 @@ public sealed class UsuarioEntidad
     public string PasswordCifrada { get; set; } = string.Empty;
     public int IdRol { get; set; }
     public string? NombreRol { get; set; }
+    public bool Activo { get; set; }
     public string Estado { get; set; } = string.Empty;
     public int IntentosFallidos { get; set; }
 }

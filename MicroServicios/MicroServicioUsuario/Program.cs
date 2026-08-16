@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
 builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
-builder.Services.AddSingleton<SeguridadRepository>();
+builder.Services.AddScoped<SeguridadRepository>();
 builder.Services.AddScoped<IAutenticacionService, AutenticacionService>();
 
 var app = builder.Build();

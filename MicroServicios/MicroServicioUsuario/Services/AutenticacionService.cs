@@ -43,7 +43,7 @@ public sealed class AutenticacionService : IAutenticacionService
                 };
             }
 
-            if (CuentaNoActiva(usuarioModelo.Estado))
+            if (CuentaNoActiva(usuarioModelo))
             {
                 return new AutenticacionResult
                 {
@@ -58,8 +58,7 @@ public sealed class AutenticacionService : IAutenticacionService
 
             if (!string.Equals(contraseñaDesencriptada, contrasena, StringComparison.Ordinal))
             {
-                var intentos = usuarioModelo.IntentosFallidos + 1;
-                await _seguridadRepository.RegistrarIntentoFallidoAsync(usuarioModelo.IdUsuario, intentos);
+                var intentos = await _seguridadRepository.RegistrarIntentoFallidoAsync(usuarioModelo.IdUsuario);
 
                 if (intentos >= 3)
                 {
@@ -78,7 +77,7 @@ public sealed class AutenticacionService : IAutenticacionService
                 };
             }
 
-            await _seguridadRepository.RegistrarIntentoFallidoAsync(usuarioModelo.IdUsuario, 0);
+            await _seguridadRepository.ReiniciarIntentosFallidosAsync(usuarioModelo.IdUsuario);
 
             var token = GenerarToken(usuarioModelo);
             var usuarioSeguro = new UsuarioSeguro(
@@ -121,10 +120,11 @@ public sealed class AutenticacionService : IAutenticacionService
         }
     }
 
-    private static bool CuentaNoActiva(string estado)
+    private static bool CuentaNoActiva(UsuarioEntidad usuario)
     {
-        return string.IsNullOrWhiteSpace(estado)
-            || !string.Equals(estado.Trim(), "Activo", StringComparison.OrdinalIgnoreCase);
+        return !usuario.Activo
+            || string.IsNullOrWhiteSpace(usuario.Estado)
+            || !string.Equals(usuario.Estado.Trim(), "Activo", StringComparison.OrdinalIgnoreCase);
     }
 
     private string DesencriptarPassword(string passwordCifrada)
@@ -150,7 +150,7 @@ public sealed class AutenticacionService : IAutenticacionService
         var ciphertext = rawDatos.AsSpan(nonceLength + tagLength).ToArray();
         var plaintext = new byte[ciphertext.Length];
 
-        using var aesGcm = new AesGcm(key);
+        using var aesGcm = new AesGcm(key, tagLength);
         aesGcm.Decrypt(nonce, ciphertext, tag, plaintext);
 
         return Encoding.UTF8.GetString(plaintext);

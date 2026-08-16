@@ -12,8 +12,8 @@ const api = axios.create({
 export async function login(usuario, contrasena) {
   try {
     const response = await api.post('/api/autenticacion/login', {
-      Usuario: usuario,
-      Contrasena: contrasena,
+      usuario,
+      contrasena,
     })
 
     const data = response?.data ?? {}
