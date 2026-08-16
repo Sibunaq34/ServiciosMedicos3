@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\MicroServicioUsuario.csproj": {}
+    "C:\\xampp\\htdocs\\ServiciosMedicosNuevos\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\MicroServicioUsuario.csproj": {}
   },
   "projects": {
-    "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\MicroServicioUsuario.csproj": {
+    "C:\\xampp\\htdocs\\ServiciosMedicosNuevos\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\MicroServicioUsuario.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\MicroServicioUsuario.csproj",
+        "projectUniqueName": "C:\\xampp\\htdocs\\ServiciosMedicosNuevos\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\MicroServicioUsuario.csproj",
         "projectName": "MicroServicioUsuario",
-        "projectPath": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\MicroServicioUsuario.csproj",
-        "packagesPath": "C:\\Users\\anton\\.nuget\\packages\\",
-        "outputPath": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\obj\\",
+        "projectPath": "C:\\xampp\\htdocs\\ServiciosMedicosNuevos\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\MicroServicioUsuario.csproj",
+        "packagesPath": "C:\\Users\\ericu\\.nuget\\packages\\",
+        "outputPath": "C:\\xampp\\htdocs\\ServiciosMedicosNuevos\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\anton\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ericu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -58,11 +59,26 @@
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
+<<<<<<< Updated upstream
               "version": "[10.0.10, )"
+=======
+              "version": "[10.0.11, )"
+            },
+            "Microsoft.OpenApi": {
+              "target": "Package",
+              "version": "[3.9.0, )"
+>>>>>>> Stashed changes
             },
             "MySql.Data": {
               "target": "Package",
               "version": "[26.7.0, )"
+<<<<<<< Updated upstream
+=======
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.22.0, )"
+>>>>>>> Stashed changes
             }
           },
           "imports": [

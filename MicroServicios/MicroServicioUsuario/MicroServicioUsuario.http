@@ -1,6 +1,32 @@
-@MicroServicioUsuario_HostAddress = http://localhost:5272
+@MicroServicioUsuario_HostAddress = http://localhost:5221
 
-GET {{MicroServicioUsuario_HostAddress}}/weatherforecast/
-Accept: application/json
+### Login válido
+POST {{MicroServicioUsuario_HostAddress}}/api/autenticacion/login
+Content-Type: application/json
+
+{
+  "usuario": "Admin",
+  "contrasena": "TuPasswordAqui"
+}
 
 ###
+
+### Campos vacíos
+POST {{MicroServicioUsuario_HostAddress}}/api/autenticacion/login
+Content-Type: application/json
+
+{
+  "usuario": "",
+  "contrasena": ""
+}
+
+###
+
+### Credenciales incorrectas
+POST {{MicroServicioUsuario_HostAddress}}/api/autenticacion/login
+Content-Type: application/json
+
+{
+  "usuario": "UsuarioInexistente",
+  "contrasena": "PasswordIncorrecto"
+}
