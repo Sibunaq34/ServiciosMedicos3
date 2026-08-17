@@ -1,5 +1,5 @@
 using MicroServicioOferentes.Entities;
-using Servicios_Medicos.Repository;
+using MicroServicioOferentes.Repository;
 
 namespace MicroServicioOferentes.Services;
 
