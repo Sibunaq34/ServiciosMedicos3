@@ -2,7 +2,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MicroServicioUsuario.Entities;
 using MicroServicioUsuario.Repository;
@@ -11,6 +10,11 @@ namespace MicroServicioUsuario.Services;
 
 public sealed class AutenticacionService : IAutenticacionService
 {
+    private const string GcmPrefix = "GCM:";
+    private const int GcmNonceLength = 12;
+    private const int GcmTagLength = 16;
+    private const int CbcIvLength = 16;
+
     private readonly SeguridadRepository _seguridadRepository;
     private readonly IConfiguration _configuration;
 
@@ -79,6 +83,14 @@ public sealed class AutenticacionService : IAutenticacionService
 
             await _seguridadRepository.ReiniciarIntentosFallidosAsync(usuarioModelo.IdUsuario);
 
+            if (!EsFormatoGcm(usuarioModelo.PasswordCifrada))
+            {
+                var passwordGcm = EncriptarGcm(contrasena);
+                await _seguridadRepository.ActualizarPasswordCifradaUsuarioAsync(
+                    usuarioModelo.IdUsuario,
+                    passwordGcm);
+            }
+
             var token = GenerarToken(usuarioModelo);
             var usuarioSeguro = new UsuarioSeguro(
                 usuarioModelo.IdUsuario,
@@ -134,26 +146,76 @@ public sealed class AutenticacionService : IAutenticacionService
             throw new InvalidOperationException("La contraseña almacenada es inválida.");
         }
 
-        var key = ObtenerClaveAes();
-        var rawDatos = Convert.FromBase64String(passwordCifrada);
+        return EsFormatoGcm(passwordCifrada)
+            ? DesencriptarGcm(passwordCifrada)
+            : DesencriptarLegacyCbc(passwordCifrada);
+    }
 
-        const int nonceLength = 12;
-        const int tagLength = 16;
+    private static bool EsFormatoGcm(string passwordCifrada)
+    {
+        return passwordCifrada.StartsWith(GcmPrefix, StringComparison.OrdinalIgnoreCase);
+    }
 
-        if (rawDatos.Length < nonceLength + tagLength)
+    private string DesencriptarGcm(string passwordCifrada)
+    {
+        var payloadBase64 = passwordCifrada[GcmPrefix.Length..];
+        var payload = Convert.FromBase64String(payloadBase64);
+
+        if (payload.Length < GcmNonceLength + GcmTagLength)
         {
             throw new InvalidOperationException("El valor de contraseña cifrada no cumple el formato esperado.");
         }
 
-        var nonce = rawDatos.AsSpan(0, nonceLength).ToArray();
-        var tag = rawDatos.AsSpan(nonceLength, tagLength).ToArray();
-        var ciphertext = rawDatos.AsSpan(nonceLength + tagLength).ToArray();
+        var ciphertextLength = payload.Length - GcmNonceLength - GcmTagLength;
+        var nonce = payload.AsSpan(0, GcmNonceLength).ToArray();
+        var ciphertext = payload.AsSpan(GcmNonceLength, ciphertextLength).ToArray();
+        var tag = payload.AsSpan(payload.Length - GcmTagLength, GcmTagLength).ToArray();
         var plaintext = new byte[ciphertext.Length];
 
-        using var aesGcm = new AesGcm(key, tagLength);
+        using var aesGcm = new AesGcm(ObtenerClaveAes(), GcmTagLength);
         aesGcm.Decrypt(nonce, ciphertext, tag, plaintext);
 
         return Encoding.UTF8.GetString(plaintext);
+    }
+
+    private string DesencriptarLegacyCbc(string passwordCifrada)
+    {
+        var payload = Convert.FromBase64String(passwordCifrada);
+        if (payload.Length <= CbcIvLength)
+        {
+            throw new InvalidOperationException("El valor de contraseña cifrada no cumple el formato esperado.");
+        }
+
+        var iv = payload.AsSpan(0, CbcIvLength).ToArray();
+        var ciphertext = payload.AsSpan(CbcIvLength).ToArray();
+
+        using var aes = Aes.Create();
+        aes.Key = ObtenerClaveAes();
+        aes.IV = iv;
+        aes.Mode = CipherMode.CBC;
+        aes.Padding = PaddingMode.PKCS7;
+
+        using var decryptor = aes.CreateDecryptor();
+        var plaintext = decryptor.TransformFinalBlock(ciphertext, 0, ciphertext.Length);
+        return Encoding.UTF8.GetString(plaintext);
+    }
+
+    private string EncriptarGcm(string password)
+    {
+        var nonce = RandomNumberGenerator.GetBytes(GcmNonceLength);
+        var plaintext = Encoding.UTF8.GetBytes(password);
+        var ciphertext = new byte[plaintext.Length];
+        var tag = new byte[GcmTagLength];
+
+        using var aesGcm = new AesGcm(ObtenerClaveAes(), GcmTagLength);
+        aesGcm.Encrypt(nonce, plaintext, ciphertext, tag);
+
+        var payload = new byte[nonce.Length + ciphertext.Length + tag.Length];
+        Buffer.BlockCopy(nonce, 0, payload, 0, nonce.Length);
+        Buffer.BlockCopy(ciphertext, 0, payload, nonce.Length, ciphertext.Length);
+        Buffer.BlockCopy(tag, 0, payload, nonce.Length + ciphertext.Length, tag.Length);
+
+        return GcmPrefix + Convert.ToBase64String(payload);
     }
 
     private byte[] ObtenerClaveAes()
@@ -164,11 +226,7 @@ public sealed class AutenticacionService : IAutenticacionService
             throw new InvalidOperationException("Security:AesKey no está configurado.");
         }
 
-        var keyBytes = TryDecodeBase64(claveConfigurada);
-        if (keyBytes is null)
-        {
-            keyBytes = Encoding.UTF8.GetBytes(claveConfigurada);
-        }
+        var keyBytes = Encoding.UTF8.GetBytes(claveConfigurada);
 
         if (keyBytes.Length != 32)
         {
@@ -176,18 +234,6 @@ public sealed class AutenticacionService : IAutenticacionService
         }
 
         return keyBytes;
-    }
-
-    private static byte[]? TryDecodeBase64(string value)
-    {
-        try
-        {
-            return Convert.FromBase64String(value);
-        }
-        catch
-        {
-            return null;
-        }
     }
 
     private string GenerarToken(UsuarioEntidad usuario)

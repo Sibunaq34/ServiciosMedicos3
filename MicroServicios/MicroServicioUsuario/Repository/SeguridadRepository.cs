@@ -1,5 +1,4 @@
 using System.Data;
-using System.Data.Common;
 using Dapper;
 using MicroServicioUsuario.Entities;
 
@@ -52,6 +51,21 @@ public sealed class SeguridadRepository
 
         await connection.ExecuteAsync(
             "ReiniciarIntentosFallidos",
+            parameters,
+            commandType: CommandType.StoredProcedure);
+    }
+
+    public async Task ActualizarPasswordCifradaUsuarioAsync(int idUsuario, string passwordCifrada)
+    {
+        using var connection = _connectionFactory.CreateConnection();
+        await connection.OpenAsync();
+
+        var parameters = new DynamicParameters();
+        parameters.Add("pIdUsuario", idUsuario, DbType.Int32);
+        parameters.Add("pPasswordCifrada", passwordCifrada, DbType.String);
+
+        await connection.ExecuteAsync(
+            "ActualizarPasswordCifradaUsuario",
             parameters,
             commandType: CommandType.StoredProcedure);
     }

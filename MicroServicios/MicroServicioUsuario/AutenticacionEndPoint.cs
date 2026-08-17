@@ -8,7 +8,10 @@ public static class AutenticacionEndPoint
     {
         app.MapPost("/api/autenticacion/login", async (LoginRequest request, IAutenticacionService autenticacionService) =>
         {
-            if (request is null || string.IsNullOrWhiteSpace(request.Usuario) || string.IsNullOrWhiteSpace(request.Contrasena))
+            if (request is null
+                || string.IsNullOrWhiteSpace(request.Usuario)
+                || request.Usuario.Trim().Length > 50
+                || string.IsNullOrWhiteSpace(request.Contrasena))
             {
                 return Results.BadRequest(new { mensaje = "Usuario y contraseña son requeridos." });
             }
