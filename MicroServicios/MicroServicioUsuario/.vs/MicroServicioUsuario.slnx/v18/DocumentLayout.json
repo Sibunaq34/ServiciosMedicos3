@@ -1,68 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{8589E1CC-5FA1-4DAF-81C9-C5D934F38E93}|..\\MicroServicioOferentes\\MicroServicioOferentes.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\microserviciooferentes\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{71FB7A30-DF78-4472-A985-C914BCD44FD3}|..\\Gateway\\Gateway.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\gateway\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8589E1CC-5FA1-4DAF-81C9-C5D934F38E93}|..\\MicroServicioOferentes\\MicroServicioOferentes.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\microserviciooferentes\\repository\\oferentepuestorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 194,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioOferentes\\Program.cs",
-              "RelativeDocumentMoniker": "..\\MicroServicioOferentes\\Program.cs",
-              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioOferentes\\Program.cs",
-              "RelativeToolTip": "..\\MicroServicioOferentes\\Program.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-17T22:48:10.484Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "OferentePuestoRepository.cs",
-              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioOferentes\\Repository\\OferentePuestoRepository.cs",
-              "RelativeDocumentMoniker": "..\\MicroServicioOferentes\\Repository\\OferentePuestoRepository.cs",
-              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioOferentes\\Repository\\OferentePuestoRepository.cs",
-              "RelativeToolTip": "..\\MicroServicioOferentes\\Repository\\OferentePuestoRepository.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-17T22:46:53.599Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\Gateway\\appsettings.json",
-              "RelativeDocumentMoniker": "..\\Gateway\\appsettings.json",
-              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\Gateway\\appsettings.json",
-              "RelativeToolTip": "..\\Gateway\\appsettings.json",
-              "ViewState": "AgIAACgAAAAAAAAAAAAAADkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-08-17T22:05:55.259Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }
