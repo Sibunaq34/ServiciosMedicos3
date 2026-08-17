@@ -2,10 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Header({ children }) {
     const navigate = useNavigate();
-    const nombreCompleto = (() => {
+    const nombreUsuario = (() => {
         try {
             const usuario = JSON.parse(sessionStorage.getItem("user") ?? "{}");
-            return usuario.nombreCompleto || usuario.usuario || "Usuario";
+            return usuario.usuario || "Usuario";
         } catch {
             return "Usuario";
         }
@@ -55,7 +55,7 @@ function Header({ children }) {
                         <div className="d-flex align-items-center gap-3 ms-auto user-session-area">
                             <div className="user-avatar-pill">
                                 <span className="user-avatar-badge" aria-hidden="true"><i className="bi bi-person-fill"></i></span>
-                                <span className="text-truncate text-dark fw-semibold">{nombreCompleto}</span>
+                                <span className="text-truncate text-dark fw-semibold">{nombreUsuario}</span>
                             </div>
                             <button type="button" className="btn btn-link btn-sm text-decoration-none" onClick={cerrarSesion}>Cerrar sesión</button>
                         </div>
