@@ -10,13 +10,6 @@ public sealed class PasswordEncryptionService : IPasswordEncryptionService
     private const int GcmTagLength = 16;
     private const int CbcIvLength = 16;
 
-    private readonly IConfiguration _configuration;
-
-    public PasswordEncryptionService(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
-
     public string Encrypt(string password)
     {
         var nonce = RandomNumberGenerator.GetBytes(GcmNonceLength);
@@ -94,16 +87,16 @@ public sealed class PasswordEncryptionService : IPasswordEncryptionService
 
     private byte[] GetAesKey()
     {
-        var configuredKey = _configuration["Security:AesKey"];
+        const string configuredKey = "71962840184936251827825463019826";
         if (string.IsNullOrWhiteSpace(configuredKey))
         {
-            throw new InvalidOperationException("Security:AesKey no está configurado.");
+            throw new InvalidOperationException("La clave AES del servicio no está configurada.");
         }
 
         var keyBytes = Encoding.UTF8.GetBytes(configuredKey);
         if (keyBytes.Length != 32)
         {
-            throw new InvalidOperationException("Security:AesKey debe tener 32 bytes.");
+            throw new InvalidOperationException("La clave AES del servicio debe tener 32 bytes.");
         }
 
         return keyBytes;
