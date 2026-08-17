@@ -19,7 +19,7 @@ function Login() {
     }
 
     const usuarioTrim = usuario.trim()
-    if (!usuarioTrim || !contrasena) {
+    if (!usuarioTrim || usuarioTrim.length > 50 || !contrasena) {
       setMensaje('Usuario y/o contraseña incorrectos.')
       return
     }
@@ -70,58 +70,70 @@ function Login() {
   }
 
   return (
-    <main className="login-page d-flex align-items-center justify-content-center">
-      <div className="login-card card shadow-sm">
-        <div className="card-body p-4">
-          <h1 className="login-title mb-2">Servicios Médicos</h1>
-          <p className="login-subtitle text-muted mb-4">Inicio de sesión</p>
-
-          {mensaje && (
-            <div className="alert alert-danger" role="alert" aria-live="polite">
-              {mensaje}
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} noValidate>
-            <div className="mb-3">
-              <label htmlFor="usuario" className="form-label">
-                Usuario
-              </label>
-              <input
-                id="usuario"
-                name="usuario"
-                type="text"
-                className="form-control"
-                value={usuario}
-                onChange={(event) => setUsuario(event.target.value)}
-                autoComplete="username"
-                placeholder="Ingrese su usuario"
-                disabled={cargando}
+    <main className="login-page">
+      <div className="login-shell">
+        <div className="login-card card shadow-sm">
+          <div className="card-body p-4">
+            <div className="login-heading text-center">
+              <img
+                className="login-symbol"
+                src="/simbolo.png"
+                alt="Símbolo de Servicios Médicos"
               />
+              <h1 className="login-title">Servicios Médicos</h1>
+              <p className="login-subtitle">Ingrese al sistema</p>
             </div>
 
-            <div className="mb-4">
-              <label htmlFor="contrasena" className="form-label">
-                Contraseña
-              </label>
-              <input
-                id="contrasena"
-                name="contrasena"
-                type="password"
-                className="form-control"
-                value={contrasena}
-                onChange={(event) => setContrasena(event.target.value)}
-                autoComplete="current-password"
-                placeholder="Ingrese su contraseña"
-                disabled={cargando}
-              />
-            </div>
+            {mensaje && (
+              <div className="alert alert-danger login-alert" role="alert" aria-live="polite">
+                {mensaje}
+              </div>
+            )}
 
-            <button type="submit" className="btn btn-primary w-100" disabled={cargando}>
-              {cargando ? 'Ingresando...' : 'Aceptar'}
-            </button>
-          </form>
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="mb-3">
+                <label htmlFor="usuario" className="form-label">
+                  Usuario
+                </label>
+                <input
+                  id="usuario"
+                  name="usuario"
+                  type="text"
+                  className="form-control"
+                  value={usuario}
+                  onChange={(event) => setUsuario(event.target.value)}
+                  autoComplete="username"
+                  maxLength={50}
+                  disabled={cargando}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="contrasena" className="form-label">
+                  Contraseña
+                </label>
+                <input
+                  id="contrasena"
+                  name="contrasena"
+                  type="password"
+                  className="form-control"
+                  value={contrasena}
+                  onChange={(event) => setContrasena(event.target.value)}
+                  autoComplete="current-password"
+                  disabled={cargando}
+                />
+              </div>
+
+              <button type="submit" className="btn login-submit w-100" disabled={cargando}>
+                {cargando ? 'Ingresando...' : 'Aceptar'}
+              </button>
+            </form>
+          </div>
         </div>
+
+        <footer className="login-footer">
+          © 2026 Servicios Médicos S.A. <span>Aviso de privacidad</span>
+        </footer>
       </div>
     </main>
   )

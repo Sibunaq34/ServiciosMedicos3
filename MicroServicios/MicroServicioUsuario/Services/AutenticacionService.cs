@@ -2,7 +2,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MicroServicioUsuario.Entities;
 using MicroServicioUsuario.Repository;
@@ -13,11 +12,16 @@ public sealed class AutenticacionService : IAutenticacionService
 {
     private readonly SeguridadRepository _seguridadRepository;
     private readonly IConfiguration _configuration;
+    private readonly IPasswordEncryptionService _passwordEncryptionService;
 
-    public AutenticacionService(SeguridadRepository seguridadRepository, IConfiguration configuration)
+    public AutenticacionService(
+        SeguridadRepository seguridadRepository,
+        IConfiguration configuration,
+        IPasswordEncryptionService passwordEncryptionService)
     {
         _seguridadRepository = seguridadRepository;
         _configuration = configuration;
+        _passwordEncryptionService = passwordEncryptionService;
     }
 
     public async Task<AutenticacionResult> AuthenticateAsync(string usuario, string contrasena)
@@ -54,7 +58,7 @@ public sealed class AutenticacionService : IAutenticacionService
             }
 
             var contraseñaAlmacenada = usuarioModelo.PasswordCifrada;
-            var contraseñaDesencriptada = DesencriptarPassword(contraseñaAlmacenada);
+            var contraseñaDesencriptada = _passwordEncryptionService.Decrypt(contraseñaAlmacenada);
 
             if (!string.Equals(contraseñaDesencriptada, contrasena, StringComparison.Ordinal))
             {
@@ -78,6 +82,14 @@ public sealed class AutenticacionService : IAutenticacionService
             }
 
             await _seguridadRepository.ReiniciarIntentosFallidosAsync(usuarioModelo.IdUsuario);
+
+            if (!_passwordEncryptionService.IsGcmFormat(usuarioModelo.PasswordCifrada))
+            {
+                var passwordGcm = _passwordEncryptionService.Encrypt(contrasena);
+                await _seguridadRepository.ActualizarPasswordCifradaUsuarioAsync(
+                    usuarioModelo.IdUsuario,
+                    passwordGcm);
+            }
 
             var token = GenerarToken(usuarioModelo);
             var usuarioSeguro = new UsuarioSeguro(
@@ -125,69 +137,6 @@ public sealed class AutenticacionService : IAutenticacionService
         return !usuario.Activo
             || string.IsNullOrWhiteSpace(usuario.Estado)
             || !string.Equals(usuario.Estado.Trim(), "Activo", StringComparison.OrdinalIgnoreCase);
-    }
-
-    private string DesencriptarPassword(string passwordCifrada)
-    {
-        if (string.IsNullOrWhiteSpace(passwordCifrada))
-        {
-            throw new InvalidOperationException("La contraseña almacenada es inválida.");
-        }
-
-        var key = ObtenerClaveAes();
-        var rawDatos = Convert.FromBase64String(passwordCifrada);
-
-        const int nonceLength = 12;
-        const int tagLength = 16;
-
-        if (rawDatos.Length < nonceLength + tagLength)
-        {
-            throw new InvalidOperationException("El valor de contraseña cifrada no cumple el formato esperado.");
-        }
-
-        var nonce = rawDatos.AsSpan(0, nonceLength).ToArray();
-        var tag = rawDatos.AsSpan(nonceLength, tagLength).ToArray();
-        var ciphertext = rawDatos.AsSpan(nonceLength + tagLength).ToArray();
-        var plaintext = new byte[ciphertext.Length];
-
-        using var aesGcm = new AesGcm(key, tagLength);
-        aesGcm.Decrypt(nonce, ciphertext, tag, plaintext);
-
-        return Encoding.UTF8.GetString(plaintext);
-    }
-
-    private byte[] ObtenerClaveAes()
-    {
-        var claveConfigurada = _configuration["Security:AesKey"];
-        if (string.IsNullOrWhiteSpace(claveConfigurada))
-        {
-            throw new InvalidOperationException("Security:AesKey no está configurado.");
-        }
-
-        var keyBytes = TryDecodeBase64(claveConfigurada);
-        if (keyBytes is null)
-        {
-            keyBytes = Encoding.UTF8.GetBytes(claveConfigurada);
-        }
-
-        if (keyBytes.Length != 32)
-        {
-            throw new InvalidOperationException("Security:AesKey debe tener 32 bytes.");
-        }
-
-        return keyBytes;
-    }
-
-    private static byte[]? TryDecodeBase64(string value)
-    {
-        try
-        {
-            return Convert.FromBase64String(value);
-        }
-        catch
-        {
-            return null;
-        }
     }
 
     private string GenerarToken(UsuarioEntidad usuario)
