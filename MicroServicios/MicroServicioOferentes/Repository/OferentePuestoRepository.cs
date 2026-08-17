@@ -2,7 +2,7 @@ using System.Data;
 using Dapper;
 using MicroServicioOferentes.Entities;
 
-namespace Servicios_Medicos.Repository;
+namespace MicroServicioOferentes.Repository;
 
 public sealed class OferentePuestoRepository : IOferentePuestoRepository
 {
@@ -46,9 +46,14 @@ public sealed class OferentePuestoRepository : IOferentePuestoRepository
             },
             commandType: CommandType.StoredProcedure);
 
-        var total = await result.ReadSingleAsync<int>();
+        var totalResult = await result.ReadSingleAsync<TotalResult>();
         var oferentes = (await result.ReadAsync<OferentePuesto>()).AsList();
 
-        return (oferentes, total);
+        return (oferentes, totalResult.Total);
+    }
+
+    private sealed class TotalResult
+    {
+        public int Total { get; set; }
     }
 }
