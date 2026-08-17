@@ -10,18 +10,18 @@ namespace MicroServicioUsuario.Services;
 
 public sealed class AutenticacionService : IAutenticacionService
 {
-    private const string GcmPrefix = "GCM:";
-    private const int GcmNonceLength = 12;
-    private const int GcmTagLength = 16;
-    private const int CbcIvLength = 16;
-
     private readonly SeguridadRepository _seguridadRepository;
     private readonly IConfiguration _configuration;
+    private readonly IPasswordEncryptionService _passwordEncryptionService;
 
-    public AutenticacionService(SeguridadRepository seguridadRepository, IConfiguration configuration)
+    public AutenticacionService(
+        SeguridadRepository seguridadRepository,
+        IConfiguration configuration,
+        IPasswordEncryptionService passwordEncryptionService)
     {
         _seguridadRepository = seguridadRepository;
         _configuration = configuration;
+        _passwordEncryptionService = passwordEncryptionService;
     }
 
     public async Task<AutenticacionResult> AuthenticateAsync(string usuario, string contrasena)
@@ -58,7 +58,7 @@ public sealed class AutenticacionService : IAutenticacionService
             }
 
             var contraseñaAlmacenada = usuarioModelo.PasswordCifrada;
-            var contraseñaDesencriptada = DesencriptarPassword(contraseñaAlmacenada);
+            var contraseñaDesencriptada = _passwordEncryptionService.Decrypt(contraseñaAlmacenada);
 
             if (!string.Equals(contraseñaDesencriptada, contrasena, StringComparison.Ordinal))
             {
@@ -83,9 +83,9 @@ public sealed class AutenticacionService : IAutenticacionService
 
             await _seguridadRepository.ReiniciarIntentosFallidosAsync(usuarioModelo.IdUsuario);
 
-            if (!EsFormatoGcm(usuarioModelo.PasswordCifrada))
+            if (!_passwordEncryptionService.IsGcmFormat(usuarioModelo.PasswordCifrada))
             {
-                var passwordGcm = EncriptarGcm(contrasena);
+                var passwordGcm = _passwordEncryptionService.Encrypt(contrasena);
                 await _seguridadRepository.ActualizarPasswordCifradaUsuarioAsync(
                     usuarioModelo.IdUsuario,
                     passwordGcm);
@@ -137,103 +137,6 @@ public sealed class AutenticacionService : IAutenticacionService
         return !usuario.Activo
             || string.IsNullOrWhiteSpace(usuario.Estado)
             || !string.Equals(usuario.Estado.Trim(), "Activo", StringComparison.OrdinalIgnoreCase);
-    }
-
-    private string DesencriptarPassword(string passwordCifrada)
-    {
-        if (string.IsNullOrWhiteSpace(passwordCifrada))
-        {
-            throw new InvalidOperationException("La contraseña almacenada es inválida.");
-        }
-
-        return EsFormatoGcm(passwordCifrada)
-            ? DesencriptarGcm(passwordCifrada)
-            : DesencriptarLegacyCbc(passwordCifrada);
-    }
-
-    private static bool EsFormatoGcm(string passwordCifrada)
-    {
-        return passwordCifrada.StartsWith(GcmPrefix, StringComparison.OrdinalIgnoreCase);
-    }
-
-    private string DesencriptarGcm(string passwordCifrada)
-    {
-        var payloadBase64 = passwordCifrada[GcmPrefix.Length..];
-        var payload = Convert.FromBase64String(payloadBase64);
-
-        if (payload.Length < GcmNonceLength + GcmTagLength)
-        {
-            throw new InvalidOperationException("El valor de contraseña cifrada no cumple el formato esperado.");
-        }
-
-        var ciphertextLength = payload.Length - GcmNonceLength - GcmTagLength;
-        var nonce = payload.AsSpan(0, GcmNonceLength).ToArray();
-        var ciphertext = payload.AsSpan(GcmNonceLength, ciphertextLength).ToArray();
-        var tag = payload.AsSpan(payload.Length - GcmTagLength, GcmTagLength).ToArray();
-        var plaintext = new byte[ciphertext.Length];
-
-        using var aesGcm = new AesGcm(ObtenerClaveAes(), GcmTagLength);
-        aesGcm.Decrypt(nonce, ciphertext, tag, plaintext);
-
-        return Encoding.UTF8.GetString(plaintext);
-    }
-
-    private string DesencriptarLegacyCbc(string passwordCifrada)
-    {
-        var payload = Convert.FromBase64String(passwordCifrada);
-        if (payload.Length <= CbcIvLength)
-        {
-            throw new InvalidOperationException("El valor de contraseña cifrada no cumple el formato esperado.");
-        }
-
-        var iv = payload.AsSpan(0, CbcIvLength).ToArray();
-        var ciphertext = payload.AsSpan(CbcIvLength).ToArray();
-
-        using var aes = Aes.Create();
-        aes.Key = ObtenerClaveAes();
-        aes.IV = iv;
-        aes.Mode = CipherMode.CBC;
-        aes.Padding = PaddingMode.PKCS7;
-
-        using var decryptor = aes.CreateDecryptor();
-        var plaintext = decryptor.TransformFinalBlock(ciphertext, 0, ciphertext.Length);
-        return Encoding.UTF8.GetString(plaintext);
-    }
-
-    private string EncriptarGcm(string password)
-    {
-        var nonce = RandomNumberGenerator.GetBytes(GcmNonceLength);
-        var plaintext = Encoding.UTF8.GetBytes(password);
-        var ciphertext = new byte[plaintext.Length];
-        var tag = new byte[GcmTagLength];
-
-        using var aesGcm = new AesGcm(ObtenerClaveAes(), GcmTagLength);
-        aesGcm.Encrypt(nonce, plaintext, ciphertext, tag);
-
-        var payload = new byte[nonce.Length + ciphertext.Length + tag.Length];
-        Buffer.BlockCopy(nonce, 0, payload, 0, nonce.Length);
-        Buffer.BlockCopy(ciphertext, 0, payload, nonce.Length, ciphertext.Length);
-        Buffer.BlockCopy(tag, 0, payload, nonce.Length + ciphertext.Length, tag.Length);
-
-        return GcmPrefix + Convert.ToBase64String(payload);
-    }
-
-    private byte[] ObtenerClaveAes()
-    {
-        var claveConfigurada = _configuration["Security:AesKey"];
-        if (string.IsNullOrWhiteSpace(claveConfigurada))
-        {
-            throw new InvalidOperationException("Security:AesKey no está configurado.");
-        }
-
-        var keyBytes = Encoding.UTF8.GetBytes(claveConfigurada);
-
-        if (keyBytes.Length != 32)
-        {
-            throw new InvalidOperationException("Security:AesKey debe tener 32 bytes.");
-        }
-
-        return keyBytes;
     }
 
     private string GenerarToken(UsuarioEntidad usuario)
