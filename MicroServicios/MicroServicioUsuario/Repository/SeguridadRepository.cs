@@ -1,5 +1,4 @@
 using System.Data;
-using System.Data.Common;
 using Dapper;
 using MicroServicioUsuario.Entities;
 
@@ -52,6 +51,46 @@ public sealed class SeguridadRepository
 
         await connection.ExecuteAsync(
             "ReiniciarIntentosFallidos",
+            parameters,
+            commandType: CommandType.StoredProcedure);
+    }
+
+    public async Task ActualizarPasswordCifradaUsuarioAsync(int idUsuario, string passwordCifrada)
+    {
+        using var connection = _connectionFactory.CreateConnection();
+        await connection.OpenAsync();
+
+        var parameters = new DynamicParameters();
+        parameters.Add("pIdUsuario", idUsuario, DbType.Int32);
+        parameters.Add("pPasswordCifrada", passwordCifrada, DbType.String);
+
+        await connection.ExecuteAsync(
+            "ActualizarPasswordCifradaUsuario",
+            parameters,
+            commandType: CommandType.StoredProcedure);
+    }
+
+    public async Task CrearUsuarioAsync(
+        string usuario,
+        string nombreCompleto,
+        string correo,
+        string passwordCifrada,
+        string estado,
+        int idRol)
+    {
+        using var connection = _connectionFactory.CreateConnection();
+        await connection.OpenAsync();
+
+        var parameters = new DynamicParameters();
+        parameters.Add("p_usuario", usuario, DbType.String);
+        parameters.Add("p_nombre_completo", nombreCompleto, DbType.String);
+        parameters.Add("p_correo", correo, DbType.String);
+        parameters.Add("p_contrasena", passwordCifrada, DbType.String);
+        parameters.Add("p_estado", estado, DbType.String);
+        parameters.Add("p_id_rol", idRol, DbType.Int32);
+
+        await connection.ExecuteAsync(
+            "sp_Usuarios_Crear",
             parameters,
             commandType: CommandType.StoredProcedure);
     }
