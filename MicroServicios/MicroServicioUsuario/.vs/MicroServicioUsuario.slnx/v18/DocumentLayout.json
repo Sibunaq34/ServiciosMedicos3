@@ -1,12 +1,36 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{71FB7A30-DF78-4472-A985-C914BCD44FD3}|..\\Gateway\\Gateway.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\gateway\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 194,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\Gateway\\appsettings.json",
+              "RelativeDocumentMoniker": "..\\Gateway\\appsettings.json",
+              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\Gateway\\appsettings.json",
+              "RelativeToolTip": "..\\Gateway\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-17T03:29:42.764Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1,12 +1,58 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F59C2CF2-CFE1-4AA9-876A-83370A3751C3}|..\\MicroServicioEmpleados\\MicroServicioEmpleados.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\microservicioempleados\\empleadosendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{01259940-4528-4A7A-BFC9-339A918EC497}|..\\MicroServiciosPuestos\\MicroServiciosPuestos.csproj|d:\\universidad\\programacion\\proyecto_sitios\\serviciosmedicos3\\microservicios\\microserviciospuestos\\puestosendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EmpleadosEndPoint.cs",
+              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioEmpleados\\EmpleadosEndPoint.cs",
+              "RelativeDocumentMoniker": "..\\MicroServicioEmpleados\\EmpleadosEndPoint.cs",
+              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioEmpleados\\EmpleadosEndPoint.cs*",
+              "RelativeToolTip": "..\\MicroServicioEmpleados\\EmpleadosEndPoint.cs*",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwCMAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-17T03:05:20.684Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PuestosEndPoint.cs",
+              "DocumentMoniker": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\PuestosEndPoint.cs",
+              "RelativeDocumentMoniker": "..\\MicroServiciosPuestos\\PuestosEndPoint.cs",
+              "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServiciosPuestos\\PuestosEndPoint.cs",
+              "RelativeToolTip": "..\\MicroServiciosPuestos\\PuestosEndPoint.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-17T03:05:19.193Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
