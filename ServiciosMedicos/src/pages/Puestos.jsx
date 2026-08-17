@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { getPuestosByPage } from "../services/PuestosServices";
 
@@ -104,10 +105,10 @@ function Puestos() {
                                 <tr key={puesto.codigoPuesto || puesto.id || puesto.nombrePuesto}>
                                     <td data-label="Código"><span className="core6-puesto-code">{puesto.codigoPuesto || "-"}</span></td>
                                     <td data-label="Puesto">
-                                        <a className="core6-puesto-link" href="#">
+                                        <Link className="core6-puesto-link" to={`/puestos/${encodeURIComponent(puesto.codigoPuesto)}/oferentes`}>
                                             <span>{puesto.nombrePuesto || "Sin nombre"}</span>
                                             <i className="bi bi-arrow-right" aria-hidden="true"></i>
-                                        </a>
+                                        </Link>
                                     </td>
                                     <td data-label="Jefatura">
                                         {puesto.jefatura ? puesto.jefatura : <span className="text-secondary">Sin jefatura asignada</span>}

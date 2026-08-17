@@ -1,6 +1,6 @@
-@MicroServicioOferentes_HostAddress = http://localhost:5278
+@MicroServicioOferentes_HostAddress = http://localhost:5223
 
-GET {{MicroServicioOferentes_HostAddress}}/weatherforecast/
+GET {{MicroServicioOferentes_HostAddress}}/api/v1/puestos/RH-COOR/oferentes?page=1&pageSize=10
 Accept: application/json
 
 ###

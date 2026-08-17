@@ -517,70 +517,109 @@ footer {
 }
 
 /* ==========================
-   CORE9 - Detalle de oferente
+   Página de Oferentes por Puesto
    ========================== */
 
-.core9-detalle-page {
+.core7-page {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    max-width: 980px;
 }
 
-.core9-detalle-header {
+.core7-page-header {
+    border: none;
+    border-radius: 1rem;
     background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-primary-dark) 100%);
     color: #fff;
 }
 
-.core9-detalle-header h1,
-.core9-detalle-header p {
+.core7-page-header .card-body {
+    align-items: center;
+}
+
+.core7-page-header h1,
+.core7-page-header p {
     color: #fff;
 }
 
-.core9-detalle-header-icon {
+.core7-page-header-icon {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    font-size: 1.25rem;
+}
+
+.core7-page-kicker {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.core7-alert {
+    margin-bottom: 0;
+}
+
+.core7-empty-state {
+    padding: 3rem 1.5rem;
+    text-align: center;
+}
+
+.core7-empty-icon {
     display: inline-grid;
     place-items: center;
     width: 3rem;
     height: 3rem;
-    flex: 0 0 auto;
+    margin-bottom: 1rem;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.16);
+    background: var(--app-primary-light);
+    color: var(--app-primary);
     font-size: 1.25rem;
 }
 
-.core9-detalle-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.core7-table-wrap {
+    border-top: 1px solid #ECEFF3;
 }
 
-.core9-detalle-item {
-    min-width: 0;
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid #ECEFF3;
+.core7-table {
+    min-width: 560px;
 }
 
-.core9-detalle-item:nth-child(odd) {
-    border-right: 1px solid #ECEFF3;
-}
-
-.core9-detalle-item dt {
-    margin-bottom: 0.35rem;
-    color: #64748B;
-    font-size: 0.8rem;
+.core7-oferente-link {
+    color: var(--app-primary);
     font-weight: 600;
-    text-transform: uppercase;
+    text-decoration: none;
 }
 
-.core9-detalle-item dd {
-    margin: 0;
-    overflow-wrap: anywhere;
-    color: var(--app-text);
+.core7-oferente-link:hover {
+    color: var(--app-primary-dark);
+    text-decoration: underline;
 }
 
-.core9-detalle-actions {
+.core7-list-footer {
     display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem 1.25rem;
+    background-color: #fff;
+}
+
+.core7-pagination .page-link {
+    color: var(--app-primary);
+}
+
+.core7-pagination .page-item.active .page-link {
+    background-color: var(--app-primary);
+    border-color: var(--app-primary);
+    color: #fff;
+}
+
+.core7-back-button {
+    width: fit-content;
 }
 
 
@@ -629,19 +668,64 @@ footer {
         align-items: flex-start;
     }
 
-    .core9-detalle-list {
-        grid-template-columns: 1fr;
+    .core7-page-header .card-body {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .core9-detalle-item:nth-child(odd) {
-        border-right: none;
+    .core7-table {
+        min-width: 0;
     }
 
-    .core9-detalle-actions {
-        flex-direction: column-reverse;
+    .core7-table thead {
+        display: none;
     }
 
-    .core9-detalle-actions .btn {
+    .core7-table tbody,
+    .core7-table tr,
+    .core7-table td {
+        display: block;
         width: 100%;
+    }
+
+    .core7-table tbody tr {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #ECEFF3;
+    }
+
+    .core7-table tbody tr:last-child {
+        border-bottom: 0;
+    }
+
+    .core7-table td {
+        display: grid;
+        grid-template-columns: minmax(7.5rem, 42%) minmax(0, 1fr);
+        gap: 0.75rem;
+        border-bottom: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .core7-table td::before {
+        content: attr(data-label);
+        color: #6B7280;
+        font-weight: 600;
+    }
+
+    .core7-list-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .core7-pagination,
+    .core7-pagination .pagination {
+        width: 100%;
+    }
+
+    .core7-pagination .page-item {
+        flex: 1 1 auto;
+    }
+
+    .core7-pagination .page-link {
+        text-align: center;
     }
 }

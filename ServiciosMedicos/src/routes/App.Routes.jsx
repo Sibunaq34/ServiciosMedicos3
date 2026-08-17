@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Login from '../pages/Login'
 import Inicio from '../pages/Index'
+import Oferentes from '../pages/Oferentes'
 import Puestos from "../pages/Puestos";
 import DetalleOferente from '../pages/DetalleOferente'
 
@@ -42,8 +43,28 @@ function AppRoutes() {
         )}
       />
       <Route
-        path="/puestos/:codigoPuesto/oferentes/:codigoOferente"
-        element={<RequireAuth><DetalleOferente /></RequireAuth>}
+        path="/puestos/:codigoPuesto/oferentes"
+        element={(
+          <RequireAuth>
+            <Oferentes />
+          </RequireAuth>
+        )}
+      />
+      <Route
+        path="/oferentes-puesto"
+        element={(
+          <RequireAuth>
+            <Navigate to="/puestos" replace />
+          </RequireAuth>
+        )}
+      />
+      <Route
+        path="/oferentes"
+        element={(
+          <RequireAuth>
+            <Navigate to="/puestos" replace />
+          </RequireAuth>
+        )}
       />
       <Route path="*" element={<Navigate to={LOGIN_ROUTE} replace />} />
     </Routes>

@@ -1,0 +1,242 @@
+{
+  "info": {
+    "name": "CORE2 - Oferentes por Puesto",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "gatewayUrl",
+      "value": "http://localhost:5220"
+    },
+    {
+      "key": "oferentesUrl",
+      "value": "http://localhost:5223"
+    },
+    {
+      "key": "codigoPuesto",
+      "value": "RH-COOR"
+    },
+    {
+      "key": "page",
+      "value": "1"
+    },
+    {
+      "key": "pageSize",
+      "value": "10"
+    }
+  ],
+  "item": [
+    {
+      "name": "Gateway - oferentes por puesto",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{gatewayUrl}}/api/v1/puestos/{{codigoPuesto}}/oferentes?page={{page}}&pageSize={{pageSize}}",
+          "host": [
+            "{{gatewayUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "puestos",
+            "{{codigoPuesto}}",
+            "oferentes"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "{{page}}"
+            },
+            {
+              "key": "pageSize",
+              "value": "{{pageSize}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado HTTP 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Content-Type JSON', function () {",
+              "  pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+              "});",
+              "",
+              "const body = pm.response.json();",
+              "",
+              "pm.test('Respuesta paginada', function () {",
+              "  pm.expect(body).to.have.property('data');",
+              "  pm.expect(body).to.have.property('meta');",
+              "  pm.expect(body.meta.page).to.eql(Number(pm.collectionVariables.get('page')));",
+              "  pm.expect(body.meta.pageSize).to.be.at.most(100);",
+              "});",
+              "",
+              "pm.test('Propiedades minimas del oferente', function () {",
+              "  if (body.data.length > 0) {",
+              "    pm.expect(body.data[0]).to.have.property('idOferente');",
+              "    pm.expect(body.data[0]).to.have.property('nombreCompleto');",
+              "    pm.expect(body.data[0]).to.have.property('identificacion');",
+              "  }",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Microservicio directo - oferentes por puesto",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{oferentesUrl}}/api/v1/puestos/{{codigoPuesto}}/oferentes?page={{page}}&pageSize={{pageSize}}",
+          "host": [
+            "{{oferentesUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "puestos",
+            "{{codigoPuesto}}",
+            "oferentes"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "{{page}}"
+            },
+            {
+              "key": "pageSize",
+              "value": "{{pageSize}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Validacion - pagina invalida",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{gatewayUrl}}/api/v1/puestos/{{codigoPuesto}}/oferentes?page=0&pageSize={{pageSize}}",
+          "host": [
+            "{{gatewayUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "puestos",
+            "{{codigoPuesto}}",
+            "oferentes"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "0"
+            },
+            {
+              "key": "pageSize",
+              "value": "{{pageSize}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado HTTP 400', function () {",
+              "  pm.response.to.have.status(400);",
+              "});",
+              "",
+              "pm.test('Formato uniforme de error', function () {",
+              "  const body = pm.response.json();",
+              "  pm.expect(body).to.have.nested.property('error.code');",
+              "  pm.expect(body).to.have.nested.property('error.message');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Validacion - puesto inexistente",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{gatewayUrl}}/api/v1/puestos/NO-EXISTE/oferentes?page={{page}}&pageSize={{pageSize}}",
+          "host": [
+            "{{gatewayUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "puestos",
+            "NO-EXISTE",
+            "oferentes"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "{{page}}"
+            },
+            {
+              "key": "pageSize",
+              "value": "{{pageSize}}"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado HTTP 404', function () {",
+              "  pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test('Formato uniforme de error', function () {",
+              "  const body = pm.response.json();",
+              "  pm.expect(body).to.have.nested.property('error.code');",
+              "  pm.expect(body).to.have.nested.property('error.message');",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
