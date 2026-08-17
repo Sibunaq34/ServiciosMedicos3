@@ -43,7 +43,7 @@
               "RelativeDocumentMoniker": "Services\\UsuarioService.cs",
               "ToolTip": "D:\\Universidad\\Programacion\\proyecto_sitios\\ServiciosMedicos3\\MicroServicios\\MicroServicioUsuario\\Services\\UsuarioService.cs",
               "RelativeToolTip": "Services\\UsuarioService.cs",
-              "ViewState": "AgIAAIIAAAAAAAAAAAAiwIkAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIkAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-17T04:50:02.997Z",
               "EditorCaption": ""
@@ -58,8 +58,7 @@
               "RelativeToolTip": "Services\\IUsuarioService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-17T04:48:18.523Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-17T04:48:18.523Z"
             },
             {
               "$type": "Document",
@@ -71,8 +70,7 @@
               "RelativeToolTip": "UsuarioEndPoint.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAQwCsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-17T04:46:46.821Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-17T04:46:46.821Z"
             },
             {
               "$type": "Document",
@@ -84,8 +82,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-17T04:46:38.699Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-17T04:46:38.699Z"
             },
             {
               "$type": "Document",
@@ -97,8 +94,7 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-08-17T04:05:14.443Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-17T04:05:14.443Z"
             },
             {
               "$type": "Document",
@@ -110,8 +106,7 @@
               "RelativeToolTip": "..\\Gateway\\appsettings.json",
               "ViewState": "AgIAADAAAAAAAAAAAAAAAEEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-08-17T03:29:42.764Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-17T03:29:42.764Z"
             }
           ]
         }
