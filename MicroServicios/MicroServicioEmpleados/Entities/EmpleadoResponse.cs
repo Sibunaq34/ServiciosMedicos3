@@ -1,4 +1,4 @@
-namespace MicroServiciosEmpleados.DTOs;
+namespace MicroServicioEmpleados.Entities;
 
 public class EmpleadoResponse
 {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MicroServiciosEmpleados.DTOs;
+namespace MicroServicioEmpleados.Entities;
 
 public class CrearEmpleadoRequest
 {

@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using MicroServiciosEmpleados.DTOs;
+using MicroServicioEmpleados.Entities;
 using MicroServiciosEmpleados.Services;
 using Microsoft.AspNetCore.Mvc;
 

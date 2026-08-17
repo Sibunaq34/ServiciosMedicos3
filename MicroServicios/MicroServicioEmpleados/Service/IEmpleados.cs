@@ -1,4 +1,4 @@
-using MicroServiciosEmpleados.DTOs;
+using MicroServicioEmpleados.Entities;
 using MicroServiciosEmpleados.Repository;
 
 namespace MicroServiciosEmpleados.Services;

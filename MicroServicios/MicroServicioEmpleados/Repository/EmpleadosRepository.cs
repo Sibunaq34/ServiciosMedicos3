@@ -1,6 +1,6 @@
 using System.Data;
 using Dapper;
-using MicroServiciosEmpleados.DTOs;
+using MicroServicioEmpleados.Entities;
 
 namespace MicroServiciosEmpleados.Repository;
 
