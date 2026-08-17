@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Login from '../pages/Login'
 import Inicio from '../pages/Index'
+import Oferentes from '../pages/Oferentes'
 import Puestos from "../pages/Puestos";
 
 const POST_LOGIN_ROUTE = '/'
@@ -29,6 +30,14 @@ function AppRoutes() {
         element={(
           <RequireAuth>
             <Puestos />
+          </RequireAuth>
+        )}
+      />
+      <Route
+        path="/puestos/:codigoPuesto/oferentes"
+        element={(
+          <RequireAuth>
+            <Oferentes />
           </RequireAuth>
         )}
       />

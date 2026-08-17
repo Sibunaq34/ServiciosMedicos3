@@ -40,9 +40,9 @@ export async function getPuestosByPage(pagina = 1) {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const mensaje = error.response?.data?.mensaje ?? error.message
-      throw new Error(mensaje || 'No se pudieron cargar los puestos.')
+      throw new Error(mensaje || 'No se pudieron cargar los puestos.', { cause: error })
     }
 
-    throw new Error('No se pudieron cargar los puestos.')
+    throw new Error('No se pudieron cargar los puestos.', { cause: error })
   }
 }
