@@ -1,15 +1,21 @@
 import { Link, useNavigate } from "react-router-dom";
-import { clearSession, getSessionUser } from '../services/sessionService'
 
 function Header({ children }) {
-    const navigate = useNavigate()
-    const user = getSessionUser()
-    const nombreUsuario = user?.nombreCompleto || user?.usuario || 'Usuario'
+    const navigate = useNavigate();
+    const nombreCompleto = (() => {
+        try {
+            const usuario = JSON.parse(sessionStorage.getItem("user") ?? "{}");
+            return usuario.nombreCompleto || usuario.usuario || "Usuario";
+        } catch {
+            return "Usuario";
+        }
+    })();
 
     const cerrarSesion = () => {
-        clearSession()
-        navigate('/login', { replace: true })
-    }
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("user");
+        navigate("/login", { replace: true });
+    };
 
     return (
         <div className="app-layout">
@@ -49,7 +55,7 @@ function Header({ children }) {
                         <div className="d-flex align-items-center gap-3 ms-auto user-session-area">
                             <div className="user-avatar-pill">
                                 <span className="user-avatar-badge" aria-hidden="true"><i className="bi bi-person-fill"></i></span>
-                                <span className="text-truncate text-dark fw-semibold">{nombreUsuario}</span>
+                                <span className="text-truncate text-dark fw-semibold">{nombreCompleto}</span>
                             </div>
                             <button type="button" className="btn btn-link btn-sm text-decoration-none" onClick={cerrarSesion}>Cerrar sesión</button>
                         </div>

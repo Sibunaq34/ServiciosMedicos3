@@ -1,6 +1,12 @@
 function Inicio() {
-
-    const nombreCompleto = "Usuario";
+    const nombreCompleto = (() => {
+        try {
+            const usuario = JSON.parse(sessionStorage.getItem("user") ?? "{}");
+            return usuario.nombreCompleto || usuario.usuario || "Usuario";
+        } catch {
+            return "Usuario";
+        }
+    })();
 
     return (
         <div className="container mt-4">
