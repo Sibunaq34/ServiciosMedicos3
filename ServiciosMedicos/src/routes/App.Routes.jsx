@@ -3,10 +3,13 @@ import Login from '../pages/Login'
 import Inicio from '../pages/Index'
 import Puestos from "../pages/Puestos";
 import DetalleOferente from '../pages/DetalleOferente'
-import { isAuthenticated } from '../services/sessionService'
 
 const POST_LOGIN_ROUTE = '/'
 const LOGIN_ROUTE = '/login'
+
+function isAuthenticated() {
+  return Boolean(sessionStorage.getItem('token'))
+}
 
 function RequireAuth({ children }) {
   const location = useLocation()

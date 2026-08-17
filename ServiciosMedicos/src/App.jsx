@@ -2,7 +2,10 @@ import { BrowserRouter, useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
 import AppRoutes from "./routes/App.Routes";
-import { isAuthenticated } from './services/sessionService'
+
+function isAuthenticated() {
+  return Boolean(sessionStorage.getItem('token'));
+}
 
 function AppContent() {
   const location = useLocation();
