@@ -1,14 +1,7 @@
 import axios from 'axios'
+import api from './apiClient'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5220'
 const DETALLE_OFERENTE_PATH = import.meta.env.VITE_CORE8_DETALLE_OFERENTE_PATH
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-})
 
 function obtenerMensajeError(error, mensajePredeterminado) {
   if (!axios.isAxiosError(error)) {

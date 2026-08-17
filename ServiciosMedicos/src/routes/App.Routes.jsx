@@ -1,25 +1,34 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Login from '../pages/Login'
 import Inicio from '../pages/Index'
 import Puestos from "../pages/Puestos";
 import DetalleOferente from '../pages/DetalleOferente'
+import { isAuthenticated } from '../services/sessionService'
 
 const POST_LOGIN_ROUTE = '/'
 const LOGIN_ROUTE = '/login'
 
 function RequireAuth({ children }) {
-  return sessionStorage.getItem('token')
+  const location = useLocation()
+
+  return isAuthenticated()
     ? children
-    : <Navigate to={LOGIN_ROUTE} replace />
+    : <Navigate to={LOGIN_ROUTE} replace state={{ from: location }} />
+}
+
+function RedirectIfAuthenticated() {
+  return isAuthenticated()
+    ? <Navigate to={POST_LOGIN_ROUTE} replace />
+    : <Login />
 }
 
 function AppRoutes() {
   return (
     <Routes>
-      <Route path={LOGIN_ROUTE} element={<Login />} />
+      <Route path={LOGIN_ROUTE} element={<RedirectIfAuthenticated />} />
       <Route
         path={POST_LOGIN_ROUTE}
-        element={<Inicio />}
+        element={<RequireAuth><Inicio /></RequireAuth>}
       />
       <Route
         path="/puestos"
@@ -31,7 +40,7 @@ function AppRoutes() {
       />
       <Route
         path="/puestos/:codigoPuesto/oferentes/:codigoOferente"
-        element={<DetalleOferente />}
+        element={<RequireAuth><DetalleOferente /></RequireAuth>}
       />
       <Route path="*" element={<Navigate to={LOGIN_ROUTE} replace />} />
     </Routes>

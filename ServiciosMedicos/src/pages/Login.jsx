@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { login as loginService } from '../services/authService'
 import '../components/Login.css'
 
@@ -11,6 +11,7 @@ function Login() {
   const [mensaje, setMensaje] = useState('')
   const [cargando, setCargando] = useState(false)
   const navigate = useNavigate()
+  const location = useLocation()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -63,7 +64,8 @@ function Login() {
         sessionStorage.setItem('user', JSON.stringify(safeUser))
       }
 
-      navigate(POST_LOGIN_ROUTE, { replace: true })
+      const destination = location.state?.from?.pathname || POST_LOGIN_ROUTE
+      navigate(destination, { replace: true })
     } finally {
       setCargando(false)
     }

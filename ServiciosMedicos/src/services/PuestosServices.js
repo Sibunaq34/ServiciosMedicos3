@@ -1,13 +1,5 @@
 import axios from 'axios'
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5220'
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-})
+import api from './apiClient'
 
 export async function getPuestosByPage(pagina = 1) {
   try {
@@ -40,9 +32,9 @@ export async function getPuestosByPage(pagina = 1) {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const mensaje = error.response?.data?.mensaje ?? error.message
-      throw new Error(mensaje || 'No se pudieron cargar los puestos.')
+      throw new Error(mensaje || 'No se pudieron cargar los puestos.', { cause: error })
     }
 
-    throw new Error('No se pudieron cargar los puestos.')
+    throw new Error('No se pudieron cargar los puestos.', { cause: error })
   }
 }
