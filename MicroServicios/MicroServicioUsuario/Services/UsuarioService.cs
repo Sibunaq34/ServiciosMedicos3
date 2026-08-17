@@ -77,8 +77,10 @@ public sealed class UsuarioService : IUsuarioService
         {
             return TechnicalError();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            Console.WriteLine($"ERROR CREANDO USUARIO: {ex}");
+
             return TechnicalError();
         }
     }
