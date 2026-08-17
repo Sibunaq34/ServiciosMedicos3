@@ -41,6 +41,22 @@ function AppRoutes() {
           </RequireAuth>
         )}
       />
+      <Route
+        path="/oferentes-puesto"
+        element={(
+          <RequireAuth>
+            <Navigate to="/puestos" replace />
+          </RequireAuth>
+        )}
+      />
+      <Route
+        path="/oferentes"
+        element={(
+          <RequireAuth>
+            <Navigate to="/puestos" replace />
+          </RequireAuth>
+        )}
+      />
       <Route path="*" element={<Navigate to={LOGIN_ROUTE} replace />} />
     </Routes>
   )
