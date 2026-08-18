@@ -4,6 +4,10 @@ using MicroServicioOferentes.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Force configuration to load only from appsettings.json (ignore environment-specific files)
+builder.Configuration.Sources.Clear();
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactApp", policy =>

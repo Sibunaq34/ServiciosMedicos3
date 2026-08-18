@@ -26,8 +26,6 @@ function Header({ children }) {
                 <nav className="sidebar-nav nav nav-pills flex-column px-3 py-3">
                     <Link className="sidebar-link nav-link" to="/"> <i className="bi bi-house-door-fill me-2"></i>Inicio</Link>
                     <Link className="sidebar-link nav-link" to="/puestos"><i className="bi bi-clipboard-data me-2"></i>Puestos</Link>
-                    <Link className="sidebar-link nav-link" to="/puestos"><i className="bi bi-people me-2"></i>Oferentes por Puesto</Link>
-                    <Link className="sidebar-link nav-link" to="/puestos"><i className="bi bi-card-list me-2"></i>Listado de Oferentes</Link>
                 </nav>
             </aside>
 
@@ -40,8 +38,6 @@ function Header({ children }) {
                     <nav className="sidebar-nav nav nav-pills flex-column px-3 py-3">
                         <Link className="sidebar-link nav-link" to="/"> <i className="bi bi-house-door-fill me-2"></i>Inicio</Link>
                         <Link className="sidebar-link nav-link" to="/puestos"><i className="bi bi-clipboard-data me-2"></i>Puestos</Link>
-                        <Link className="sidebar-link nav-link" to="/puestos"><i className="bi bi-people me-2"></i>Oferentes por Puesto</Link>
-                        <Link className="sidebar-link nav-link" to="/puestos"><i className="bi bi-card-list me-2"></i>Listado de Oferentes</Link>
                     </nav>
                 </div>
             </div>

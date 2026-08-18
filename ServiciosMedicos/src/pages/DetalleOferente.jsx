@@ -1,39 +1,6 @@
-﻿import axios from 'axios'
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
-
-const API_BASE_URL = typeof import.meta.env.VITE_API_BASE_URL === 'string' && import.meta.env.VITE_API_BASE_URL.trim()
-  ? import.meta.env.VITE_API_BASE_URL.trim()
-  : 'http://localhost:5220'
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-})
-
-api.interceptors.request.use((config) => {
-  const token = sessionStorage.getItem('token')
-
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`
-  }
-
-  return config
-})
-
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      sessionStorage.removeItem('token')
-      sessionStorage.removeItem('user')
-      window.location.href = '/login'
-    }
-    return Promise.reject(error)
-  },
-)
+import { api, esErrorAxios } from '../services/apiService'
 
 function normalizarLista(valor) {
   if (!valor) return []
@@ -182,7 +149,7 @@ export async function obtenerOferentesPorPuesto(codigoPuesto, idOferente = null)
 
     throw new Error(payload.mensaje ?? 'No fue posible cargar el oferente.')
   } catch (error) {
-    if (axios.isAxiosError(error)) {
+    if (esErrorAxios(error)) {
       const data = error.response?.data ?? {}
       const mensaje =
         data?.mensaje ??
@@ -220,23 +187,18 @@ export async function obtenerDetalleOferente(idOferente, codigoPuesto) {
   const urls = []
 
   if (codigoPuesto) {
-    urls.push(`/api/v1/puestos/${encodeURIComponent(codigoPuesto)}/oferentes/${encodeURIComponent(id)}`)
-    urls.push(`/api/v1/puestos/${encodeURIComponent(codigoPuesto)}/oferentes`)
+    urls.push(`/Oferentes/${encodeURIComponent(id)}/detalle`)
   }
 
   urls.push(...[
-    `/api/Oferentes/${encodeURIComponent(id)}`,
-    `/api/Oferentes/${encodeURIComponent(id)}/detalle`,
-    `/api/OferenteDetalle?idOferente=${encodeURIComponent(id)}`,
+    `/Oferentes/${encodeURIComponent(id)}/detalle`,
   ])
 
   let ultimoError = null
 
   for (const url of urls) {
     try {
-      const response = await api.get(url, {
-        params: url.includes('/oferentes') && url.endsWith('/oferentes') ? { idOferente: id, page: 1, pageSize: 100 } : { idOferente: id },
-      })
+      const response = await api.get(url)
 
       const payload = response.data ?? {}
       const detalle = extraerDetalleDesdeListado(payload, id)
@@ -254,7 +216,7 @@ export async function obtenerDetalleOferente(idOferente, codigoPuesto) {
     }
   }
 
-  if (axios.isAxiosError(ultimoError)) {
+  if (esErrorAxios(ultimoError)) {
     const data = ultimoError.response?.data ?? {}
     const mensaje =
       data?.mensaje ??
@@ -291,7 +253,7 @@ export async function registrarEmpleado(datos) {
       mensaje: response.data?.mensaje ?? 'Empleado registrado correctamente.',
     }
   } catch (error) {
-    if (axios.isAxiosError(error)) {
+    if (esErrorAxios(error)) {
       const data = error.response?.data ?? {}
       const mensaje =
         data?.mensaje ??
