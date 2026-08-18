@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useEffect, useMemo, useState } from 'react'
-import { obtenerOferentesPorPuesto } from '../services/oferenteService'
+import { obtenerOferentesPorPuesto } from '../services/OferentesService'
 
 const PAGE_SIZE = 10
 
@@ -145,21 +145,25 @@ export default function Oferentes() {
                     </tr>
                   </thead>
                   <tbody>
-                    {oferentes.map((oferente) => (
-                      <tr key={oferente.idOferente}>
-                        <td data-label="Nombre completo">
-                          <Link
-                            className="core7-oferente-link"
-                            to={`/oferentes/${oferente.idOferente}?codigoPuesto=${encodeURIComponent(
-                              codigoPuesto,
-                            )}`}
-                          >
-                            {oferente.nombreCompleto}
-                          </Link>
-                        </td>
-                        <td data-label="Identificacion">{oferente.identificacion}</td>
-                      </tr>
-                    ))}
+                    {oferentes.map((oferente) => {
+                      const idOferente = oferente.idOferente ?? oferente.id ?? oferente.codigoOferente
+
+                      return (
+                        <tr key={idOferente}>
+                          <td data-label="Nombre completo">
+                            <Link
+                              className="core7-oferente-link"
+                              to={`/oferentes/${encodeURIComponent(idOferente)}?codigoPuesto=${encodeURIComponent(
+                                codigoPuesto,
+                              )}&idOferente=${encodeURIComponent(idOferente)}`}
+                            >
+                              {oferente.nombreCompleto}
+                            </Link>
+                          </td>
+                          <td data-label="Identificacion">{oferente.identificacion}</td>
+                        </tr>
+                      )
+                    })}
                   </tbody>
                 </table>
               </div>

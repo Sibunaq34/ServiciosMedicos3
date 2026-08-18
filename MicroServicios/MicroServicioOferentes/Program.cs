@@ -18,6 +18,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
 builder.Services.AddScoped<IOferentePuestoRepository, OferentePuestoRepository>();
 builder.Services.AddScoped<IOferentePuestoService, OferentePuestoService>();
+builder.Services.AddScoped<DetalleOferenteRepository>();
+builder.Services.AddScoped<IDetalleOferente, DetalleOferenteService>();
 
 var app = builder.Build();
 

@@ -1,6 +1,5 @@
-﻿
+﻿namespace MicroServiciosEmpleados.Entities
 
-namespace MicroServiciosEmpleados.Entities
 {
     public class EmpleadoContratacion
     {

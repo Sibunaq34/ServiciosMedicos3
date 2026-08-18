@@ -1,54 +1,72 @@
-using System.ComponentModel.DataAnnotations;
-using MicroServicioEmpleados.Entities;
+using MicroServiciosEmpleados.Entities;
 using MicroServiciosEmpleados.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MicroServiciosEmpleados;
+namespace MicroServicioEmpleados;
 
 public static class EmpleadosEndPoint
 {
     public static void MapEmpleadosEndpoints(this IEndpointRouteBuilder rutas)
     {
-        var grupo = rutas
-            .MapGroup("/Empleados")
-            .WithTags("Empleados")
-            .RequireCors("ReactDev");
-
-        grupo.MapPost("/", async ([FromServices] IEmpleados empleadosService, [FromBody] CrearEmpleadoRequest? request) =>
+        rutas.MapPost("/api/Empleados", async (
+            [FromBody] EntradaRegistrarEmpleado solicitud,
+            [FromServices] IEmpleados empleadosService) =>
         {
-            if (request is null)
+            if (solicitud is null
+                || solicitud.IdOferente <= 0
+                || string.IsNullOrWhiteSpace(solicitud.CodigoPuesto)
+                || solicitud.IdUsuario <= 0
+                || (solicitud.IdJefatura.HasValue && solicitud.IdJefatura.Value <= 0))
             {
-                return Results.BadRequest(new { mensaje = "El body de la solicitud es obligatorio." });
-            }
-
-            var validationResults = new List<ValidationResult>();
-            if (!Validator.TryValidateObject(request, new ValidationContext(request), validationResults, true))
-            {
-                return Results.BadRequest(new { mensaje = "Hay campos obligatorios inválidos.", errores = validationResults.Select(x => x.ErrorMessage) });
+                return Results.BadRequest(new
+                {
+                    mensaje = "Los datos para registrar el empleado son inválidos."
+                });
             }
 
             try
             {
-                var resultado = await empleadosService.CrearEmpleado(request);
+                var resultado = await empleadosService.RegistrarEmpleado(solicitud);
 
-                if (resultado.Empleado is not null)
+                return resultado switch
                 {
-                    return Results.Created($"/Empleados/{resultado.Empleado.IdEmpleado}", resultado.Empleado);
-                }
-
-                if (resultado.Error == "El oferente ya fue convertido en empleado.")
-                {
-                    return Results.Conflict(new { mensaje = resultado.Error });
-                }
-
-                return Results.NotFound(new { mensaje = resultado.Error });
+                    "" => Results.Created("/api/Empleados", new
+                    {
+                        mensaje = "Empleado registrado correctamente.",
+                        solicitud.IdOferente,
+                        CodigoPuesto = solicitud.CodigoPuesto.Trim()
+                    }),
+                    "OFFERER_NOT_FOUND" => Results.NotFound(new
+                    {
+                        mensaje = "El oferente indicado no existe."
+                    }),
+                    "POSITION_NOT_FOUND" => Results.NotFound(new
+                    {
+                        mensaje = "El puesto indicado no existe."
+                    }),
+                    "MANAGER_NOT_FOUND" => Results.NotFound(new
+                    {
+                        mensaje = "La jefatura indicada no existe."
+                    }),
+                    "EMPLOYEE_ALREADY_EXISTS" => Results.BadRequest(new
+                    {
+                        mensaje = "El oferente ya está registrado como empleado."
+                    }),
+                    _ => Results.Json(new
+                    {
+                        mensaje = "No fue posible registrar el empleado."
+                    }, statusCode: StatusCodes.Status500InternalServerError)
+                };
             }
-            catch (Exception)
+            catch
             {
-                return Results.Problem(statusCode: 500, title: "Error", detail: "Error al crear el empleado.");
+                return Results.Problem(
+                    statusCode: StatusCodes.Status500InternalServerError,
+                    title: "Error",
+                    detail: "No fue posible registrar el empleado.");
             }
         })
-        .WithName("CrearEmpleado")
+        .WithName("RegistrarEmpleado")
         .WithOpenApi();
     }
 }

@@ -1,19 +1,30 @@
-using MicroServicioEmpleados.Entities;
-using MicroServiciosEmpleados.Repository;
+﻿using MicroServiciosEmpleados.Repository;
+using MicroServiciosEmpleados.Entities;
 
-namespace MicroServiciosEmpleados.Services;
-
-public class EmpleadosService : IEmpleados
+namespace MicroServiciosEmpleados.Services
 {
-    private readonly EmpleadosRepository _empleadosRepository;
-
-    public EmpleadosService(EmpleadosRepository empleadosRepository)
+    public class EmpleadosService : IEmpleados
     {
-        _empleadosRepository = empleadosRepository;
-    }
+        private readonly EmpleadosRepository _empleadosBD;
 
-    public async Task<CrearEmpleadoRepositoryResult> CrearEmpleado(CrearEmpleadoRequest request)
-    {
-        return await _empleadosRepository.CrearEmpleado(request);
+        public EmpleadosService(
+            EmpleadosRepository empleadosBD)
+        {
+            _empleadosBD = empleadosBD;
+        }
+
+        public async Task<string> RegistrarEmpleado(EntradaRegistrarEmpleado solicitud)
+        {
+            solicitud.CodigoPuesto = solicitud.CodigoPuesto.Trim();
+
+            var validacion = await _empleadosBD.ValidarContratacion(solicitud);
+
+            if (!string.IsNullOrEmpty(validacion))
+                return validacion;
+
+            var registrado = await _empleadosBD.RegistrarEmpleado(solicitud);
+            return registrado ? string.Empty : "REGISTRATION_FAILED";
+        }
+
     }
 }

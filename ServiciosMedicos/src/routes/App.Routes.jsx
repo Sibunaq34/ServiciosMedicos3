@@ -51,6 +51,14 @@ function AppRoutes() {
         )}
       />
       <Route
+        path="/oferentes/:codigoOferente"
+        element={(
+          <RequireAuth>
+            <DetalleOferente />
+          </RequireAuth>
+        )}
+      />
+      <Route
         path="/oferentes-puesto"
         element={(
           <RequireAuth>

@@ -1,9 +1,9 @@
-using MicroServicioEmpleados.Entities;
-using MicroServiciosEmpleados.Repository;
+﻿using MicroServiciosEmpleados.Entities;
 
-namespace MicroServiciosEmpleados.Services;
-
-public interface IEmpleados
+namespace MicroServiciosEmpleados.Services
 {
-    Task<CrearEmpleadoRepositoryResult> CrearEmpleado(CrearEmpleadoRequest request);
+    public interface IEmpleados
+    {
+        Task<string> RegistrarEmpleado(EntradaRegistrarEmpleado solicitud);
+    }
 }

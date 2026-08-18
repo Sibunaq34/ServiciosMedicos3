@@ -7,7 +7,63 @@ public static class OferentesEndPoint
 {
     public static void MapOferentesEndpoints(this IEndpointRouteBuilder rutas)
     {
-        rutas.MapGet("/api/v1/puestos/{codigoPuesto}/oferentes", async (
+
+        rutas.MapGet("/Oferentes/{idOferente}/detalle", async (
+        int idOferente,
+        IDetalleOferente service,
+        ILoggerFactory loggerFactory) =>
+            {
+                var logger = loggerFactory.CreateLogger(
+                    "MicroServicioOferentes.OferentesEndPoint");
+
+                try
+                {
+                    var response = await service.ObtenerDetalleAsync(idOferente);
+
+                    if (!response.Exito)
+                    {
+                        if (idOferente <= 0)
+                        {
+                            return Results.BadRequest(response);
+                        }
+
+                        if (response.Datos == null)
+                        {
+                            return Results.NotFound(response);
+                        }
+
+                        return Results.Json(
+                            response,
+                            statusCode: StatusCodes.Status500InternalServerError);
+                    }
+
+                    return Results.Ok(response);
+                }
+                catch (Exception exception)
+                {
+                    logger.LogError(
+                        exception,
+                        "Error al consultar el detalle del oferente {IdOferente}.",
+                        idOferente);
+
+                    return Results.Json(
+                        new ResultadoDetalleOferente
+                        {
+                            Exito = false,
+                            Mensaje = "No fue posible consultar el detalle del oferente.",
+                            Datos = null
+                        },
+                        statusCode: StatusCodes.Status500InternalServerError);
+                }
+            })
+        .WithName("ObtenerDetalleOferente")
+        .Produces<ResultadoDetalleOferente>(StatusCodes.Status200OK)
+        .Produces<ResultadoDetalleOferente>(StatusCodes.Status400BadRequest)
+        .Produces<ResultadoDetalleOferente>(StatusCodes.Status404NotFound)
+        .WithOpenApi()
+        .RequireCors("ReactApp");
+
+        rutas.MapGet("/Puestos/{codigoPuesto}/oferentes", async (
             string codigoPuesto,
             int? page,
             int? pageSize,
