@@ -1,8 +1,9 @@
-﻿using System.Data;
+﻿using MicroServicioOferentes.Repository;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 
-namespace Servicios_Medicos.Repository
+namespace MicroServicioOferentes.Repository
 {
     public class DbConnectionFactory : IDbConnectionFactory
     {

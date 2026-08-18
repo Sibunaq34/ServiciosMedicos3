@@ -1,21 +1,18 @@
-﻿using System.Data;
-using MySql.Data.MySqlClient;
+using System.Data.Common;
 using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 
-namespace Servicios_Medicos.Repository
+namespace MicroServicioUsuario.Repository;
+
+public sealed class DbConnectionFactory : IDbConnectionFactory
 {
-    public class DbConnectionFactory : IDbConnectionFactory
+    private readonly string _connectionString;
+
+    public DbConnectionFactory(IConfiguration configuration)
     {
-        private readonly IConfiguration _configuration;
-
-        public DbConnectionFactory(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
-        public IDbConnection CreateConnection()
-        {
-            return new MySqlConnection(_configuration.GetConnectionString("DefaultConnection"));
-        }
+        _connectionString = configuration.GetConnectionString("DefaultConnection")
+            ?? throw new InvalidOperationException("DefaultConnection is not configured.");
     }
+
+    public DbConnection CreateConnection() => new MySqlConnection(_connectionString);
 }

@@ -1,5 +1,28 @@
 # React + Vite
 
+## CORE2 y CORE7
+
+CORE7 consulta CORE2 por medio del Gateway oficial en `MicroServicios/Gateway/`.
+
+Configuracion local sugerida:
+
+```env
+VITE_API_BASE_URL=http://localhost:5220
+```
+
+Rutas relevantes:
+
+- CORE6: `/puestos`
+- CORE7: `/puestos/:codigoPuesto/oferentes`
+- CORE2 por Gateway: `/api/v1/puestos/{codigoPuesto}/oferentes?page=1&pageSize=10`
+- CORE9 provisional: `/oferentes/{idOferente}?codigoPuesto={codigoPuesto}`
+
+Dependencias pendientes:
+
+- CORE9 debe implementar la conversion del oferente seleccionado.
+- La autenticacion queda bajo el flujo integrado de CORE4/CORE5.
+- La coleccion Postman de CORE2 esta en `Postman/CORE2_Oferentes_Puesto.postman_collection.json`.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

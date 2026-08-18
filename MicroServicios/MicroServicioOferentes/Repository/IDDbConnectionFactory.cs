@@ -1,9 +1,11 @@
 ﻿using System.Data;
 
-namespace Servicios_Medicos.Repository
+namespace MicroServicioOferentes.Repository
 {
     public interface IDbConnectionFactory
     {
         IDbConnection CreateConnection();
     }
 }
+
+
