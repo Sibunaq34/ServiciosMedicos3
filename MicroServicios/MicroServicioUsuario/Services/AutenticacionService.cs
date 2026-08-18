@@ -62,17 +62,7 @@ public sealed class AutenticacionService : IAutenticacionService
 
             if (!string.Equals(contraseñaDesencriptada, contrasena, StringComparison.Ordinal))
             {
-                var intentos = await _seguridadRepository.RegistrarIntentoFallidoAsync(usuarioModelo.IdUsuario);
-
-                if (intentos >= 3)
-                {
-                    return new AutenticacionResult
-                    {
-                        IsSuccess = false,
-                        IsForbidden = true,
-                        Mensaje = "El usuario no tiene acceso al sistema."
-                    };
-                }
+                await _seguridadRepository.RegistrarIntentoFallidoAsync(usuarioModelo.IdUsuario);
 
                 return new AutenticacionResult
                 {
