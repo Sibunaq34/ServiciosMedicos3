@@ -1,6 +1,6 @@
 using MicroServicioOferentes.Entities;
 
-namespace Servicios_Medicos.Repository;
+namespace MicroServicioOferentes.Repository;
 
 public interface IOferentePuestoRepository
 {

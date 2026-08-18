@@ -2,7 +2,7 @@
 using MySql.Data.MySqlClient;
 
 
-namespace Servicios_Medicos.Repository
+namespace MicroServicioOferentes.Repository
 {
     public class DbConnectionFactory : IDbConnectionFactory
     {
