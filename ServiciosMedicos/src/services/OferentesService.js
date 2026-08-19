@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const API_BASE_URL = typeof import.meta.env.VITE_API_BASE_URL === 'string' && import.meta.env.VITE_API_BASE_URL.trim()
   ? import.meta.env.VITE_API_BASE_URL.trim()
-  : 'https://keen-hoover.138-59-135-33.plesk.page/Gateway'
+  : ''
 
 const api = axios.create({
   baseURL: API_BASE_URL,

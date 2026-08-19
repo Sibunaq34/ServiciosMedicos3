@@ -1,0 +1,749 @@
+{
+  "info": {
+    "_postman_id": "acf36017-6bdf-4e1f-9ce9-38f5d5fdaea8",
+    "name": "ServiciosMedicos3 - Todos los microservicios",
+    "description": "Colección general del estado actual del proyecto. Ejecute primero MySQL, los microservicios 5221-5224 y el Gateway 5220. Las carpetas 01-04 contienen pruebas de lectura y validación. La carpeta 05 modifica la base de datos y debe ejecutarse manualmente. Empleados se prueba directo en 5224 porque el Gateway actual no tiene una Route activa para /Empleados.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57535220",
+    "_collection_link": "https://go.postman.co/collection/57535220-acf36017-6bdf-4e1f-9ce9-38f5d5fdaea8?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "01 - Usuario y autenticación",
+      "item": [
+        {
+          "name": "Login por Gateway - credenciales configurables",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('La API respondió', () => pm.expect(pm.response.code).to.be.oneOf([200, 401, 403, 500]));",
+                  "if (pm.response.code === 200) {",
+                  "  const json = pm.response.json();",
+                  "  pm.test('Incluye token', () => pm.expect(json.token).to.be.a('string').and.not.empty);",
+                  "  pm.collectionVariables.set('token', json.token);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuario\": \"Admin1\",\n  \"contrasena\": \"Prueba123*\"\n}"
+            },
+            "url": {
+              "raw": "{{gatewayUrl}}/api/autenticacion/login",
+              "host": [
+                "{{gatewayUrl}}"
+              ],
+              "path": [
+                "api",
+                "autenticacion",
+                "login"
+              ]
+            },
+            "description": "Prueba el login mediante el Gateway. Si retorna 200, guarda automáticamente el JWT en {{token}}. Un 500 suele indicar configuración faltante de BD, AES o JWT."
+          },
+          "response": []
+        },
+        {
+          "name": "Login directo al microservicio",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('El microservicio respondió', () => pm.expect(pm.response.code).to.be.oneOf([200, 401, 403, 500]));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuario\": \"Admin1\",\n  \"contrasena\": \"Prueba123*\"\n}"
+            },
+            "url": {
+              "raw": "{{usuarioUrl}}/api/autenticacion/login",
+              "host": [
+                "{{usuarioUrl}}"
+              ],
+              "path": [
+                "api",
+                "autenticacion",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login inválido - campos vacíos (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Devuelve 400', () => pm.response.to.have.status(400));",
+                  "pm.test('Incluye mensaje', () => pm.expect(pm.response.json()).to.have.property('mensaje'));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuario\": \"\",\n  \"contrasena\": \"\"\n}"
+            },
+            "url": {
+              "raw": "{{gatewayUrl}}/api/autenticacion/login",
+              "host": [
+                "{{gatewayUrl}}"
+              ],
+              "path": [
+                "api",
+                "autenticacion",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02 - Puestos",
+      "item": [
+        {
+          "name": "Listar puestos por Gateway",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Respuesta controlada', () => pm.expect(pm.response.code).to.be.oneOf([200, 404, 500]));",
+                  "if (pm.response.code === 200) pm.test('Respuesta JSON', () => pm.response.to.be.json);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{gatewayUrl}}/Puestos/ListaPuestos/{{pagina}}",
+              "host": [
+                "{{gatewayUrl}}"
+              ],
+              "path": [
+                "Puestos",
+                "ListaPuestos",
+                "{{pagina}}"
+              ]
+            },
+            "description": "Lista la página indicada mediante el Gateway."
+          },
+          "response": []
+        },
+        {
+          "name": "Listar puestos directo al microservicio",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Respuesta controlada', () => pm.expect(pm.response.code).to.be.oneOf([200, 404, 500]));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{puestosUrl}}/Puestos/ListaPuestos/{{pagina}}",
+              "host": [
+                "{{puestosUrl}}"
+              ],
+              "path": [
+                "Puestos",
+                "ListaPuestos",
+                "{{pagina}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03 - Oferentes por puesto (CORE2)",
+      "item": [
+        {
+          "name": "Página 1 por Gateway",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Respuesta controlada', () => pm.expect(pm.response.code).to.be.oneOf([200, 404, 500]));",
+                  "if (pm.response.code === 200) {",
+                  "  const json = pm.response.json();",
+                  "  pm.test('Contrato data/meta', () => { pm.expect(json.data).to.be.an('array'); pm.expect(json.meta).to.be.an('object'); });",
+                  "  pm.test('Servidor respeta pageSize', () => pm.expect(json.data.length).to.be.at.most(Number(pm.collectionVariables.get('pageSize'))));",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{gatewayUrl}}/Puestos/{{codigoPuesto}}/oferentes?page=1&pageSize={{pageSize}}",
+              "host": [
+                "{{gatewayUrl}}"
+              ],
+              "path": [
+                "Puestos",
+                "{{codigoPuesto}}",
+                "oferentes"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "{{pageSize}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Página 2 por Gateway",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Respuesta controlada', () => pm.expect(pm.response.code).to.be.oneOf([200, 404, 500]));",
+                  "if (pm.response.code === 200) pm.test('Meta indica página 2', () => pm.expect(pm.response.json().meta.page).to.eql(2));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{gatewayUrl}}/Puestos/{{codigoPuesto}}/oferentes?page=2&pageSize={{pageSize}}",
+              "host": [
+                "{{gatewayUrl}}"
+              ],
+              "path": [
+                "Puestos",
+                "{{codigoPuesto}}",
+                "oferentes"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "{{pageSize}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Consulta directa al microservicio",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Respuesta controlada', () => pm.expect(pm.response.code).to.be.oneOf([200, 404, 500]));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{oferentesUrl}}/Puestos/{{codigoPuesto}}/oferentes?page=1&pageSize={{pageSize}}",
+              "host": [
+                "{{oferentesUrl}}"
+              ],
+              "path": [
+                "Puestos",
+                "{{codigoPuesto}}",
+                "oferentes"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "{{pageSize}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Puesto inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Devuelve 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Código NOT_FOUND', () => pm.expect(pm.response.json().error.code).to.eql('NOT_FOUND'));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{gatewayUrl}}/Puestos/NO-EXISTE/oferentes?page=1&pageSize=10",
+              "host": [
+                "{{gatewayUrl}}"
+              ],
+              "path": [
+                "Puestos",
+                "NO-EXISTE",
+                "oferentes"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Página inválida (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Devuelve 400', () => pm.response.to.have.status(400));",
+                  "pm.test('Código VALIDATION_ERROR', () => pm.expect(pm.response.json().error.code).to.eql('VALIDATION_ERROR'));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{gatewayUrl}}/Puestos/{{codigoPuesto}}/oferentes?page=0&pageSize=10",
+              "host": [
+                "{{gatewayUrl}}"
+              ],
+              "path": [
+                "Puestos",
+                "{{codigoPuesto}}",
+                "oferentes"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PageSize mayor al máximo (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Devuelve 400', () => pm.response.to.have.status(400));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{gatewayUrl}}/Puestos/{{codigoPuesto}}/oferentes?page=1&pageSize=101",
+              "host": [
+                "{{gatewayUrl}}"
+              ],
+              "path": [
+                "Puestos",
+                "{{codigoPuesto}}",
+                "oferentes"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "101"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04 - Empleados - validaciones seguras",
+      "item": [
+        {
+          "name": "Oferente inexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Devuelve 400', () => pm.response.to.have.status(400));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"idOferente\": 50,\r\n  \"codigoPuesto\": \"RH-COOR\",\r\n  \"idJefatura\": null,\r\n  \"idUsuario\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{gatewayUrl}}/api/Empleados",
+              "host": [
+                "{{gatewayUrl}}"
+              ],
+              "path": [
+                "api",
+                "Empleados"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "IDs inválidos (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Devuelve 400', () => pm.response.to.have.status(400));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idOferente\": 0,\n  \"idPuesto\": 0,\n  \"idJefatura\": 0\n}"
+            },
+            "url": {
+              "raw": "{{gatewayUrl}}/api/Empleados",
+              "host": [
+                "{{gatewayUrl}}"
+              ],
+              "path": [
+                "api",
+                "Empleados"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Empleado ya registrado",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"idOferente\": 15,\r\n  \"codigoPuesto\": \"RH-COOR\",\r\n  \"idJefatura\": null,\r\n  \"idUsuario\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{gatewayUrl}}/api/Empleados",
+              "host": [
+                "{{gatewayUrl}}"
+              ],
+              "path": [
+                "api",
+                "Empleados"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registrar oferente como empleado",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"idOferente\": 19,\r\n  \"codigoPuesto\": \"RH-COOR\",\r\n  \"idJefatura\": null,\r\n  \"idUsuario\": 1\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{gatewayUrl}}/api/Empleados",
+              "host": [
+                "{{gatewayUrl}}"
+              ],
+              "path": [
+                "api",
+                "Empleados"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "El Gateway actual no expone /Empleados. Estas solicitudes usan directamente el puerto 5224."
+    },
+    {
+      "name": "05 - Escritura en BD - ejecutar manualmente",
+      "item": [
+        {
+          "name": "Crear usuario por Gateway",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Respuesta controlada', () => pm.expect(pm.response.code).to.be.oneOf([201, 400, 409, 500]));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuario\": \"postman_prueba\",\n  \"nombreCompleto\": \"Usuario de prueba Postman\",\n  \"correo\": \"postman.prueba@example.com\",\n  \"contrasena\": \"Prueba1234.\",\n  \"idRol\": 1,\n  \"estado\": \"Activo\"\n}"
+            },
+            "url": {
+              "raw": "{{gatewayUrl}}/api/usuarios",
+              "host": [
+                "{{gatewayUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios"
+              ]
+            },
+            "description": "Crea un registro real. Si se repite el usuario o correo, puede devolver 409."
+          },
+          "response": []
+        }
+      ],
+      "description": "ADVERTENCIA: estas solicitudes crean o modifican datos. Revise las variables antes de pulsar Send. No use Run folder indiscriminadamente."
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "gatewayUrl",
+      "value": "http://localhost:5220"
+    },
+    {
+      "key": "usuarioUrl",
+      "value": "http://localhost:5221"
+    },
+    {
+      "key": "puestosUrl",
+      "value": "http://localhost:5222"
+    },
+    {
+      "key": "oferentesUrl",
+      "value": "http://localhost:5223"
+    },
+    {
+      "key": "empleadosUrl",
+      "value": "http://localhost:5224"
+    },
+    {
+      "key": "usuario",
+      "value": "Sitios"
+    },
+    {
+      "key": "contrasena",
+      "value": "Sitios1234."
+    },
+    {
+      "key": "token",
+      "secret": true
+    },
+    {
+      "key": "pagina",
+      "value": "1"
+    },
+    {
+      "key": "codigoPuesto",
+      "value": "ADM-ASI"
+    },
+    {
+      "key": "pageSize",
+      "value": "2"
+    },
+    {
+      "key": "idOferente",
+      "value": "1"
+    },
+    {
+      "key": "idPuesto",
+      "value": "1"
+    },
+    {
+      "key": "idJefatura",
+      "value": "1"
+    }
+  ]
+}
