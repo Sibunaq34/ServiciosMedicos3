@@ -15,6 +15,5 @@ namespace MicroServicioPuestos.Entities
 
         public string? Jefatura { get; set; }
 
-        public int? pagina { get; set; }
     }
 }

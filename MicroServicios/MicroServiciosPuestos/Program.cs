@@ -37,8 +37,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Enviro
 
 
 app.UseCors("ReactDev");
-
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.MapPuestosEndpoints();
 
 app.Run();
