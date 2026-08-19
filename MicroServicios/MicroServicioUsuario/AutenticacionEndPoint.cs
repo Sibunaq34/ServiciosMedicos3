@@ -33,7 +33,7 @@ public static class AutenticacionEndPoint
                 return Results.Json(new { mensaje = "Usuario y/o contraseña incorrectos." }, statusCode: 401);
             }
 
-            return Results.Ok(new
+            return Results.Created("/api/autenticacion/login", new
             {
                 token = resultado.Token,
                 usuario = resultado.Usuario
