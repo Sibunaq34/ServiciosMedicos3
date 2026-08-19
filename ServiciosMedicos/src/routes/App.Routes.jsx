@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import Login from '../pages/Login'
+import Login from '../pages/Login/Login'
 import Inicio from '../pages/Index'
 import Oferentes from '../pages/Oferentes'
 import Puestos from "../pages/Puestos";

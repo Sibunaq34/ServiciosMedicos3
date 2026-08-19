@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { login as loginService } from '../services/authService'
-import '../components/Login.css'
+import { login as loginService } from '../../services/authService'
+import './Login.css'
 
 const POST_LOGIN_ROUTE = '/'
 
