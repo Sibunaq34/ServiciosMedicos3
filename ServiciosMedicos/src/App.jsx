@@ -1,6 +1,8 @@
 import { BrowserRouter, useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import Footer from "./components/Footer";
 import AppRoutes from "./routes/App.Routes";
 
 function isAuthenticated() {
@@ -16,9 +18,16 @@ function AppContent() {
   }
 
   return (
-    <Header>
-      <AppRoutes />
-    </Header>
+    <div className="app-layout">
+      <Sidebar />
+      <div className="app-content">
+        <Header />
+        <main className="app-main">
+          <AppRoutes />
+        </main>
+        <Footer />
+      </div>
+    </div>
   );
 }
 
